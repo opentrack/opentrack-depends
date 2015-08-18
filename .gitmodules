@@ -1,0 +1,15 @@
+[submodule "aruco"]
+	path = aruco
+	url = https://github.com/opentrack/aruco.git
+[submodule "LibOVR"]
+	path = LibOVR
+	url = https://github.com/opentrack/LibOVR.git
+[submodule "flandmark"]
+	path = flandmark
+	url = https://github.com/uricamic/flandmark.git
+[submodule "headtracker"]
+	path = headtracker
+	url = https://github.com/sthalik/headtracker.git
+[submodule "opencv"]
+	path = opencv
+	url = https://github.com/Itseez/opencv.git
