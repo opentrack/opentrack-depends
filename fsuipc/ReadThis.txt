@@ -1,0 +1,120 @@
+FSUIPC Developer Kit: Library for MSVC/C++ programmers
+======================================================
+
+To interface to FSUIPC (versions 1.998e or later) in your MSVC/C++ programs:
+
+* insert the LIB and Header file into your source folder
+* include the header in your source module(s) (#include "...")
+* add the Lib to the list of Libs in the Link section of the Project Settings
+* call the appropriate Library routines in your code.
+
+More on this last part (and please also refer to the UIPCHello example
+provided):
+
+Opening the link to FSUIPC
+==========================
+
+For this you use the following Library toutine:
+
+	BOOL FSUIPC_Open(DWORD dwFSReq, DWORD *pdwResult);
+
+where
+	dwFSReq specified which Flight Simulator you want to connect to:
+	
+		SIM_ANY	for any supported by FSUIPC or equivalent	
+		SIM_FS98	FS98
+		SIM_FS2K	FS2000
+		SIM_FS2K2	FS2002
+		SIM_FS2K4	FS2004
+		SIM_FSX	FSX
+		SIM_ESP	ESP (first version)
+		SIM_CFS2	CFS2
+		SIM_CFS1	CFS
+and
+	pResult is a pointer to a DWORD to receive an error number if the
+	operation fails.
+	
+If FSUIPC_Open returns "FALSE" then the value in the result DWORD will
+tell you what went wrong. The errors currently possible are defined in
+the Header file (see the list of FSUIPC_ERR_ ... definitions).
+
+If it returns "TRUE" then the link is open and ready for your requests.
+Already the Library routine will have obtained some data for you:
+
+	DWORD FSUIPC_Version;	// HIWORD is 1000 x Version Number, minimum 1998
+							// LOWORD is build letter, with a = 1 etc.
+	DWORD FSUIPC_FS_Version;
+							// SIM_FS98, SIM_FS2K etc -- see above
+
+
+Closing the link
+================
+
+Before terminating your program, or trying to re-open (e.g. to re-connect
+after a lost connection, possibly due to FS crashing or closing), you must
+Close the link to free up the resources it uses:
+
+	void FSUIPC_Close(void);
+	
+There is no harm done if you Close a link that is already Closed.
+
+
+
+Specifying the requests
+=======================
+
+The interface to FSUIPC and hence the simulator is simply one of reads and
+writes from and to specific "offsets". These "were originally true offsets
+into a specific Global data earea within FS, but nowadays, at least in FS2000
+and CFS they are more likely to be treated a Identifiers to specific
+variables, and are translated within FSUIPC. However, you may still address
+data with contiguous offsets in blocks, as FSUIPC breaks these down if it
+needs to.
+
+The following Library calls are used to accumulate Read and Write requests:
+
+	BOOL FSUIPC_Read(DWORD dwOffset, DWORD dwSize,
+											void *pDest, DWORD *pdwResult);
+	BOOL FSUIPC_Write(DWORD dwOffset, DWORD dwSize,
+											void *pSrce, DWORD *pdwResult);
+											
+In both cases you supply an offset, identifying the data required or to be
+written, and a size (in bytes). The pointers "pDest" for reads and "pSrce"
+for writes naturally must point to the area to receive the result or (for
+writes) the area containing the data to be written. These pointers are defined
+as "void *" here so that you can use whatever component size or structure you
+like, as appropriate for the data in question.
+
+The DWORD for the result is used to identify the reason for error should the
+return be FALSE. The only possible errors on these calls are an unopened
+link or a full data area. You can only accumulate so much data before you need
+to get FSUIPC to "process" it. This is next:
+
+
+Processing the requests
+=======================
+
+	BOOL FSUIPC_Process(DWORD *pdwResult);
+	
+This routine sends all the requests accumulated using the Read and Write calls
+since the last Process call (if any). It is this call which actually operates
+the interface.
+
+As usual , the error number in the Result DWORD needs to be checked if this
+call returns FALSE, indicating an error.
+
+Note that, if your program is run under WideClient, it is likely that your
+first requests for data are met with zeroes for everything. this is because
+WideClient sends off the request but meanwhile returns what it already has. If
+you depend on seeing correct data from the outset, you will need to wait some
+milliseconds (100 or more is good, 500 safer) and read again.
+
+If you are coninually reading the same data over and over in a loop, as when,
+for instance, maintaining a moving map position and so on, the initial values
+from Wideclient shouldn't be any bother. But remember, in loops, allow some
+time for other processes to run, and also process your own Windows messages.
+
+
+==============================================================================
+Pete Dowson, 6th March 2008
+

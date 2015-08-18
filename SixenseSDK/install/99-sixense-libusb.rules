@@ -1,0 +1,5 @@
+# Allow all users read and write raw USB devices for Razer
+  SUBSYSTEMS=="usb", ATTR{manufacturer}=="Razer", ATTR{product}=="Razer Hydra", \
+  MODE="0666"
+
+

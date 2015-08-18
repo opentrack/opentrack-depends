@@ -1,0 +1,713 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		21839AB61484017900F978BA /* libsixense.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 21839AB51484017900F978BA /* libsixense.dylib */; };
+		21839AB81484018D00F978BA /* libsixense_utils.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 21839AB71484018D00F978BA /* libsixense_utils.dylib */; };
+		21839AB91484019700F978BA /* libfreeglut.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2185354B147DD0D500C24A68 /* libfreeglut.dylib */; };
+		21839ABC148402EE00F978BA /* sixense_simple3d.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21839ABA148402DD00F978BA /* sixense_simple3d.cpp */; };
+		21839AD01484046100F978BA /* glut.h in Headers */ = {isa = PBXBuildFile; fileRef = 21853588147DD1F300C24A68 /* glut.h */; };
+		21839AD11484046400F978BA /* freeglut_stroke_mono_roman.c in Sources */ = {isa = PBXBuildFile; fileRef = 2185357A147DD1E800C24A68 /* freeglut_stroke_mono_roman.c */; };
+		21839AD21484046800F978BA /* freeglut_stroke_roman.c in Sources */ = {isa = PBXBuildFile; fileRef = 2185357B147DD1E800C24A68 /* freeglut_stroke_roman.c */; };
+		21839AD31484046B00F978BA /* freeglut_structure.c in Sources */ = {isa = PBXBuildFile; fileRef = 2185357C147DD1E800C24A68 /* freeglut_structure.c */; };
+		21839AD41484046E00F978BA /* freeglut_teapot_data.h in Headers */ = {isa = PBXBuildFile; fileRef = 2185357D147DD1E800C24A68 /* freeglut_teapot_data.h */; };
+		21839AD51484047100F978BA /* freeglut_teapot.c in Sources */ = {isa = PBXBuildFile; fileRef = 2185357E147DD1E800C24A68 /* freeglut_teapot.c */; };
+		21839AD61484047500F978BA /* freeglut_videoresize.c in Sources */ = {isa = PBXBuildFile; fileRef = 2185357F147DD1E800C24A68 /* freeglut_videoresize.c */; };
+		21839AD71484047900F978BA /* freeglut_window.c in Sources */ = {isa = PBXBuildFile; fileRef = 21853580147DD1E800C24A68 /* freeglut_window.c */; };
+		21839AD81484047C00F978BA /* freeglut_std.h in Headers */ = {isa = PBXBuildFile; fileRef = 21853578147DD1BE00C24A68 /* freeglut_std.h */; };
+		21839AD91484048000F978BA /* freeglut_font_data.c in Sources */ = {isa = PBXBuildFile; fileRef = 2185355A147DD1B300C24A68 /* freeglut_font_data.c */; };
+		21839ADA1484048900F978BA /* freeglut_font.c in Sources */ = {isa = PBXBuildFile; fileRef = 2185355B147DD1B300C24A68 /* freeglut_font.c */; };
+		21839ADB1484048D00F978BA /* freeglut_gamemode.c in Sources */ = {isa = PBXBuildFile; fileRef = 2185355C147DD1B300C24A68 /* freeglut_gamemode.c */; };
+		21839ADC1484049100F978BA /* freeglut_geometry.c in Sources */ = {isa = PBXBuildFile; fileRef = 2185355D147DD1B300C24A68 /* freeglut_geometry.c */; };
+		21839ADD1484049400F978BA /* freeglut_glutfont_definitions.c in Sources */ = {isa = PBXBuildFile; fileRef = 2185355E147DD1B300C24A68 /* freeglut_glutfont_definitions.c */; };
+		21839ADE1484049700F978BA /* freeglut_init.c in Sources */ = {isa = PBXBuildFile; fileRef = 2185355F147DD1B300C24A68 /* freeglut_init.c */; };
+		21839ADF1484049B00F978BA /* freeglut_input_devices.c in Sources */ = {isa = PBXBuildFile; fileRef = 21853560147DD1B300C24A68 /* freeglut_input_devices.c */; };
+		21839AE01484049F00F978BA /* freeglut_internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 21853561147DD1B300C24A68 /* freeglut_internal.h */; };
+		21839AE1148404A200F978BA /* freeglut_joystick.c in Sources */ = {isa = PBXBuildFile; fileRef = 21853562147DD1B300C24A68 /* freeglut_joystick.c */; };
+		21839AE2148404A600F978BA /* freeglut_main.c in Sources */ = {isa = PBXBuildFile; fileRef = 21853563147DD1B300C24A68 /* freeglut_main.c */; };
+		21839AE3148404A900F978BA /* freeglut_menu.c in Sources */ = {isa = PBXBuildFile; fileRef = 21853564147DD1B300C24A68 /* freeglut_menu.c */; };
+		21839AE4148404AC00F978BA /* freeglut_misc.c in Sources */ = {isa = PBXBuildFile; fileRef = 21853565147DD1B300C24A68 /* freeglut_misc.c */; };
+		21839AE5148404B000F978BA /* freeglut_overlay.c in Sources */ = {isa = PBXBuildFile; fileRef = 21853566147DD1B300C24A68 /* freeglut_overlay.c */; };
+		21839AE6148404B300F978BA /* freeglut_spaceball.c in Sources */ = {isa = PBXBuildFile; fileRef = 21853567147DD1B300C24A68 /* freeglut_spaceball.c */; };
+		21839AE7148404B700F978BA /* freeglut_state.c in Sources */ = {isa = PBXBuildFile; fileRef = 21853568147DD1B300C24A68 /* freeglut_state.c */; };
+		21839AE8148404BA00F978BA /* freeglut_ext.h in Headers */ = {isa = PBXBuildFile; fileRef = 21853558147DD17300C24A68 /* freeglut_ext.h */; };
+		21839AE9148404BD00F978BA /* freeglut_callbacks.c in Sources */ = {isa = PBXBuildFile; fileRef = 21853550147DD16200C24A68 /* freeglut_callbacks.c */; };
+		21839AEA148404C000F978BA /* freeglut_cursor.c in Sources */ = {isa = PBXBuildFile; fileRef = 21853551147DD16200C24A68 /* freeglut_cursor.c */; };
+		21839AEB148404C300F978BA /* freeglut_display.c in Sources */ = {isa = PBXBuildFile; fileRef = 21853552147DD16200C24A68 /* freeglut_display.c */; };
+		21839AEC148404C700F978BA /* freeglut_ext.c in Sources */ = {isa = PBXBuildFile; fileRef = 21853553147DD16200C24A68 /* freeglut_ext.c */; };
+		21839AED148404D600F978BA /* sixense_simple3d.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21839ABA148402DD00F978BA /* sixense_simple3d.cpp */; };
+		21839AEF148404EE00F978BA /* libsixense_x64.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 21839AEE148404EE00F978BA /* libsixense_x64.dylib */; };
+		21839AF21484050700F978BA /* libfreeglut.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 21839A9E1484005200F978BA /* libfreeglut.dylib */; };
+		21853554147DD16200C24A68 /* freeglut_callbacks.c in Sources */ = {isa = PBXBuildFile; fileRef = 21853550147DD16200C24A68 /* freeglut_callbacks.c */; };
+		21853555147DD16200C24A68 /* freeglut_cursor.c in Sources */ = {isa = PBXBuildFile; fileRef = 21853551147DD16200C24A68 /* freeglut_cursor.c */; };
+		21853556147DD16200C24A68 /* freeglut_display.c in Sources */ = {isa = PBXBuildFile; fileRef = 21853552147DD16200C24A68 /* freeglut_display.c */; };
+		21853557147DD16200C24A68 /* freeglut_ext.c in Sources */ = {isa = PBXBuildFile; fileRef = 21853553147DD16200C24A68 /* freeglut_ext.c */; };
+		21853559147DD17300C24A68 /* freeglut_ext.h in Headers */ = {isa = PBXBuildFile; fileRef = 21853558147DD17300C24A68 /* freeglut_ext.h */; };
+		21853569147DD1B300C24A68 /* freeglut_font_data.c in Sources */ = {isa = PBXBuildFile; fileRef = 2185355A147DD1B300C24A68 /* freeglut_font_data.c */; };
+		2185356A147DD1B300C24A68 /* freeglut_font.c in Sources */ = {isa = PBXBuildFile; fileRef = 2185355B147DD1B300C24A68 /* freeglut_font.c */; };
+		2185356B147DD1B300C24A68 /* freeglut_gamemode.c in Sources */ = {isa = PBXBuildFile; fileRef = 2185355C147DD1B300C24A68 /* freeglut_gamemode.c */; };
+		2185356C147DD1B300C24A68 /* freeglut_geometry.c in Sources */ = {isa = PBXBuildFile; fileRef = 2185355D147DD1B300C24A68 /* freeglut_geometry.c */; };
+		2185356D147DD1B300C24A68 /* freeglut_glutfont_definitions.c in Sources */ = {isa = PBXBuildFile; fileRef = 2185355E147DD1B300C24A68 /* freeglut_glutfont_definitions.c */; };
+		2185356E147DD1B300C24A68 /* freeglut_init.c in Sources */ = {isa = PBXBuildFile; fileRef = 2185355F147DD1B300C24A68 /* freeglut_init.c */; };
+		2185356F147DD1B300C24A68 /* freeglut_input_devices.c in Sources */ = {isa = PBXBuildFile; fileRef = 21853560147DD1B300C24A68 /* freeglut_input_devices.c */; };
+		21853570147DD1B300C24A68 /* freeglut_internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 21853561147DD1B300C24A68 /* freeglut_internal.h */; };
+		21853571147DD1B300C24A68 /* freeglut_joystick.c in Sources */ = {isa = PBXBuildFile; fileRef = 21853562147DD1B300C24A68 /* freeglut_joystick.c */; };
+		21853572147DD1B300C24A68 /* freeglut_main.c in Sources */ = {isa = PBXBuildFile; fileRef = 21853563147DD1B300C24A68 /* freeglut_main.c */; };
+		21853573147DD1B300C24A68 /* freeglut_menu.c in Sources */ = {isa = PBXBuildFile; fileRef = 21853564147DD1B300C24A68 /* freeglut_menu.c */; };
+		21853574147DD1B300C24A68 /* freeglut_misc.c in Sources */ = {isa = PBXBuildFile; fileRef = 21853565147DD1B300C24A68 /* freeglut_misc.c */; };
+		21853575147DD1B300C24A68 /* freeglut_overlay.c in Sources */ = {isa = PBXBuildFile; fileRef = 21853566147DD1B300C24A68 /* freeglut_overlay.c */; };
+		21853576147DD1B300C24A68 /* freeglut_spaceball.c in Sources */ = {isa = PBXBuildFile; fileRef = 21853567147DD1B300C24A68 /* freeglut_spaceball.c */; };
+		21853577147DD1B300C24A68 /* freeglut_state.c in Sources */ = {isa = PBXBuildFile; fileRef = 21853568147DD1B300C24A68 /* freeglut_state.c */; };
+		21853579147DD1BE00C24A68 /* freeglut_std.h in Headers */ = {isa = PBXBuildFile; fileRef = 21853578147DD1BE00C24A68 /* freeglut_std.h */; };
+		21853581147DD1E800C24A68 /* freeglut_stroke_mono_roman.c in Sources */ = {isa = PBXBuildFile; fileRef = 2185357A147DD1E800C24A68 /* freeglut_stroke_mono_roman.c */; };
+		21853582147DD1E800C24A68 /* freeglut_stroke_roman.c in Sources */ = {isa = PBXBuildFile; fileRef = 2185357B147DD1E800C24A68 /* freeglut_stroke_roman.c */; };
+		21853583147DD1E800C24A68 /* freeglut_structure.c in Sources */ = {isa = PBXBuildFile; fileRef = 2185357C147DD1E800C24A68 /* freeglut_structure.c */; };
+		21853584147DD1E800C24A68 /* freeglut_teapot_data.h in Headers */ = {isa = PBXBuildFile; fileRef = 2185357D147DD1E800C24A68 /* freeglut_teapot_data.h */; };
+		21853585147DD1E800C24A68 /* freeglut_teapot.c in Sources */ = {isa = PBXBuildFile; fileRef = 2185357E147DD1E800C24A68 /* freeglut_teapot.c */; };
+		21853586147DD1E800C24A68 /* freeglut_videoresize.c in Sources */ = {isa = PBXBuildFile; fileRef = 2185357F147DD1E800C24A68 /* freeglut_videoresize.c */; };
+		21853587147DD1E800C24A68 /* freeglut_window.c in Sources */ = {isa = PBXBuildFile; fileRef = 21853580147DD1E800C24A68 /* freeglut_window.c */; };
+		21853589147DD1F300C24A68 /* glut.h in Headers */ = {isa = PBXBuildFile; fileRef = 21853588147DD1F300C24A68 /* glut.h */; };
+		2187B7E214841FF400C2F1D6 /* libsixense_utils_x64.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 21839AF0148404FA00F978BA /* libsixense_utils_x64.dylib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		21839AA41484007F00F978BA /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		21839AC3148403C400F978BA /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		21839A9E1484005200F978BA /* libfreeglut.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libfreeglut.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		21839AA61484007F00F978BA /* sixense_simple3d */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "compiled.mach-o.executable"; path = sixense_simple3d; sourceTree = BUILT_PRODUCTS_DIR; };
+		21839AB51484017900F978BA /* libsixense.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsixense.dylib; path = ../../../lib/OSX/release_dll/libsixense.dylib; sourceTree = SOURCE_ROOT; };
+		21839AB71484018D00F978BA /* libsixense_utils.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsixense_utils.dylib; path = ../../../lib/OSX/release_dll/libsixense_utils.dylib; sourceTree = SOURCE_ROOT; };
+		21839ABA148402DD00F978BA /* sixense_simple3d.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = sixense_simple3d.cpp; path = ../progs/demos/sixense_simple3d/sixense_simple3d.cpp; sourceTree = SOURCE_ROOT; };
+		21839AC5148403C400F978BA /* sixense_simple3d */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = sixense_simple3d; sourceTree = BUILT_PRODUCTS_DIR; };
+		21839AEE148404EE00F978BA /* libsixense_x64.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsixense_x64.dylib; path = ../../../lib/OSX_x64/release_dll/libsixense_x64.dylib; sourceTree = SOURCE_ROOT; };
+		21839AF0148404FA00F978BA /* libsixense_utils_x64.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsixense_utils_x64.dylib; path = ../../../lib/OSX_x64/release_dll/libsixense_utils_x64.dylib; sourceTree = SOURCE_ROOT; };
+		2185354B147DD0D500C24A68 /* libfreeglut.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libfreeglut.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		21853550147DD16200C24A68 /* freeglut_callbacks.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = freeglut_callbacks.c; path = ../src/freeglut_callbacks.c; sourceTree = SOURCE_ROOT; };
+		21853551147DD16200C24A68 /* freeglut_cursor.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = freeglut_cursor.c; path = ../src/freeglut_cursor.c; sourceTree = SOURCE_ROOT; };
+		21853552147DD16200C24A68 /* freeglut_display.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = freeglut_display.c; path = ../src/freeglut_display.c; sourceTree = SOURCE_ROOT; };
+		21853553147DD16200C24A68 /* freeglut_ext.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = freeglut_ext.c; path = ../src/freeglut_ext.c; sourceTree = SOURCE_ROOT; };
+		21853558147DD17300C24A68 /* freeglut_ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = freeglut_ext.h; path = ../include/GL/freeglut_ext.h; sourceTree = SOURCE_ROOT; };
+		2185355A147DD1B300C24A68 /* freeglut_font_data.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = freeglut_font_data.c; path = ../src/freeglut_font_data.c; sourceTree = SOURCE_ROOT; };
+		2185355B147DD1B300C24A68 /* freeglut_font.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = freeglut_font.c; path = ../src/freeglut_font.c; sourceTree = SOURCE_ROOT; };
+		2185355C147DD1B300C24A68 /* freeglut_gamemode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = freeglut_gamemode.c; path = ../src/freeglut_gamemode.c; sourceTree = SOURCE_ROOT; };
+		2185355D147DD1B300C24A68 /* freeglut_geometry.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = freeglut_geometry.c; path = ../src/freeglut_geometry.c; sourceTree = SOURCE_ROOT; };
+		2185355E147DD1B300C24A68 /* freeglut_glutfont_definitions.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = freeglut_glutfont_definitions.c; path = ../src/freeglut_glutfont_definitions.c; sourceTree = SOURCE_ROOT; };
+		2185355F147DD1B300C24A68 /* freeglut_init.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = freeglut_init.c; path = ../src/freeglut_init.c; sourceTree = SOURCE_ROOT; };
+		21853560147DD1B300C24A68 /* freeglut_input_devices.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = freeglut_input_devices.c; path = ../src/freeglut_input_devices.c; sourceTree = SOURCE_ROOT; };
+		21853561147DD1B300C24A68 /* freeglut_internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = freeglut_internal.h; path = ../src/freeglut_internal.h; sourceTree = SOURCE_ROOT; };
+		21853562147DD1B300C24A68 /* freeglut_joystick.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = freeglut_joystick.c; path = ../src/freeglut_joystick.c; sourceTree = SOURCE_ROOT; };
+		21853563147DD1B300C24A68 /* freeglut_main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = freeglut_main.c; path = ../src/freeglut_main.c; sourceTree = SOURCE_ROOT; };
+		21853564147DD1B300C24A68 /* freeglut_menu.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = freeglut_menu.c; path = ../src/freeglut_menu.c; sourceTree = SOURCE_ROOT; };
+		21853565147DD1B300C24A68 /* freeglut_misc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = freeglut_misc.c; path = ../src/freeglut_misc.c; sourceTree = SOURCE_ROOT; };
+		21853566147DD1B300C24A68 /* freeglut_overlay.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = freeglut_overlay.c; path = ../src/freeglut_overlay.c; sourceTree = SOURCE_ROOT; };
+		21853567147DD1B300C24A68 /* freeglut_spaceball.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = freeglut_spaceball.c; path = ../src/freeglut_spaceball.c; sourceTree = SOURCE_ROOT; };
+		21853568147DD1B300C24A68 /* freeglut_state.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = freeglut_state.c; path = ../src/freeglut_state.c; sourceTree = SOURCE_ROOT; };
+		21853578147DD1BE00C24A68 /* freeglut_std.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = freeglut_std.h; path = ../include/GL/freeglut_std.h; sourceTree = SOURCE_ROOT; };
+		2185357A147DD1E800C24A68 /* freeglut_stroke_mono_roman.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = freeglut_stroke_mono_roman.c; path = ../src/freeglut_stroke_mono_roman.c; sourceTree = SOURCE_ROOT; };
+		2185357B147DD1E800C24A68 /* freeglut_stroke_roman.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = freeglut_stroke_roman.c; path = ../src/freeglut_stroke_roman.c; sourceTree = SOURCE_ROOT; };
+		2185357C147DD1E800C24A68 /* freeglut_structure.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = freeglut_structure.c; path = ../src/freeglut_structure.c; sourceTree = SOURCE_ROOT; };
+		2185357D147DD1E800C24A68 /* freeglut_teapot_data.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = freeglut_teapot_data.h; path = ../src/freeglut_teapot_data.h; sourceTree = SOURCE_ROOT; };
+		2185357E147DD1E800C24A68 /* freeglut_teapot.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = freeglut_teapot.c; path = ../src/freeglut_teapot.c; sourceTree = SOURCE_ROOT; };
+		2185357F147DD1E800C24A68 /* freeglut_videoresize.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = freeglut_videoresize.c; path = ../src/freeglut_videoresize.c; sourceTree = SOURCE_ROOT; };
+		21853580147DD1E800C24A68 /* freeglut_window.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = freeglut_window.c; path = ../src/freeglut_window.c; sourceTree = SOURCE_ROOT; };
+		21853588147DD1F300C24A68 /* glut.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = glut.h; path = ../include/GL/glut.h; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		21839A9B1484005200F978BA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		21839AA31484007F00F978BA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				21839AB91484019700F978BA /* libfreeglut.dylib in Frameworks */,
+				21839AB81484018D00F978BA /* libsixense_utils.dylib in Frameworks */,
+				21839AB61484017900F978BA /* libsixense.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		21839AC2148403C400F978BA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				21839AF21484050700F978BA /* libfreeglut.dylib in Frameworks */,
+				21839AEF148404EE00F978BA /* libsixense_x64.dylib in Frameworks */,
+				2187B7E214841FF400C2F1D6 /* libsixense_utils_x64.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		21853548147DD0D500C24A68 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		21839A721483FFB200F978BA /* sixense_simple3d */ = {
+			isa = PBXGroup;
+			children = (
+				21839ABA148402DD00F978BA /* sixense_simple3d.cpp */,
+			);
+			name = sixense_simple3d;
+			sourceTree = "<group>";
+		};
+		21853532147DD0AB00C24A68 = {
+			isa = PBXGroup;
+			children = (
+				21839AF0148404FA00F978BA /* libsixense_utils_x64.dylib */,
+				21839AEE148404EE00F978BA /* libsixense_x64.dylib */,
+				21839AB71484018D00F978BA /* libsixense_utils.dylib */,
+				21839AB51484017900F978BA /* libsixense.dylib */,
+				21839A721483FFB200F978BA /* sixense_simple3d */,
+				2185358A147DD20400C24A68 /* freeglut */,
+				2185353E147DD0AB00C24A68 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2185353E147DD0AB00C24A68 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2185354B147DD0D500C24A68 /* libfreeglut.dylib */,
+				21839A9E1484005200F978BA /* libfreeglut.dylib */,
+				21839AA61484007F00F978BA /* sixense_simple3d */,
+				21839AC5148403C400F978BA /* sixense_simple3d */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2185358A147DD20400C24A68 /* freeglut */ = {
+			isa = PBXGroup;
+			children = (
+				21853588147DD1F300C24A68 /* glut.h */,
+				2185357A147DD1E800C24A68 /* freeglut_stroke_mono_roman.c */,
+				2185357B147DD1E800C24A68 /* freeglut_stroke_roman.c */,
+				2185357C147DD1E800C24A68 /* freeglut_structure.c */,
+				2185357D147DD1E800C24A68 /* freeglut_teapot_data.h */,
+				2185357E147DD1E800C24A68 /* freeglut_teapot.c */,
+				2185357F147DD1E800C24A68 /* freeglut_videoresize.c */,
+				21853580147DD1E800C24A68 /* freeglut_window.c */,
+				21853578147DD1BE00C24A68 /* freeglut_std.h */,
+				2185355A147DD1B300C24A68 /* freeglut_font_data.c */,
+				2185355B147DD1B300C24A68 /* freeglut_font.c */,
+				2185355C147DD1B300C24A68 /* freeglut_gamemode.c */,
+				2185355D147DD1B300C24A68 /* freeglut_geometry.c */,
+				2185355E147DD1B300C24A68 /* freeglut_glutfont_definitions.c */,
+				2185355F147DD1B300C24A68 /* freeglut_init.c */,
+				21853560147DD1B300C24A68 /* freeglut_input_devices.c */,
+				21853561147DD1B300C24A68 /* freeglut_internal.h */,
+				21853562147DD1B300C24A68 /* freeglut_joystick.c */,
+				21853563147DD1B300C24A68 /* freeglut_main.c */,
+				21853564147DD1B300C24A68 /* freeglut_menu.c */,
+				21853565147DD1B300C24A68 /* freeglut_misc.c */,
+				21853566147DD1B300C24A68 /* freeglut_overlay.c */,
+				21853567147DD1B300C24A68 /* freeglut_spaceball.c */,
+				21853568147DD1B300C24A68 /* freeglut_state.c */,
+				21853558147DD17300C24A68 /* freeglut_ext.h */,
+				21853550147DD16200C24A68 /* freeglut_callbacks.c */,
+				21853551147DD16200C24A68 /* freeglut_cursor.c */,
+				21853552147DD16200C24A68 /* freeglut_display.c */,
+				21853553147DD16200C24A68 /* freeglut_ext.c */,
+			);
+			name = freeglut;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		21839A9C1484005200F978BA /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				21839AD01484046100F978BA /* glut.h in Headers */,
+				21839AD41484046E00F978BA /* freeglut_teapot_data.h in Headers */,
+				21839AD81484047C00F978BA /* freeglut_std.h in Headers */,
+				21839AE01484049F00F978BA /* freeglut_internal.h in Headers */,
+				21839AE8148404BA00F978BA /* freeglut_ext.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		21853549147DD0D500C24A68 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				21853559147DD17300C24A68 /* freeglut_ext.h in Headers */,
+				21853570147DD1B300C24A68 /* freeglut_internal.h in Headers */,
+				21853579147DD1BE00C24A68 /* freeglut_std.h in Headers */,
+				21853584147DD1E800C24A68 /* freeglut_teapot_data.h in Headers */,
+				21853589147DD1F300C24A68 /* glut.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		21839A9D1484005200F978BA /* freeglut_x86_64 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 21839A9F1484005200F978BA /* Build configuration list for PBXNativeTarget "freeglut_x86_64" */;
+			buildPhases = (
+				21839A9A1484005200F978BA /* Sources */,
+				21839A9B1484005200F978BA /* Frameworks */,
+				21839A9C1484005200F978BA /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = freeglut_x86_64;
+			productName = freeglut_x86_64;
+			productReference = 21839A9E1484005200F978BA /* libfreeglut.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+		21839AA51484007F00F978BA /* sixense_simple3d_i386 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 21839AAD1484007F00F978BA /* Build configuration list for PBXNativeTarget "sixense_simple3d_i386" */;
+			buildPhases = (
+				21839AA21484007F00F978BA /* Sources */,
+				21839AA31484007F00F978BA /* Frameworks */,
+				21839AA41484007F00F978BA /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = sixense_simple3d_i386;
+			productName = sixense_simple3d_i386;
+			productReference = 21839AA61484007F00F978BA /* sixense_simple3d */;
+			productType = "com.apple.product-type.tool";
+		};
+		21839AC4148403C400F978BA /* sixense_simple3d_x86_64 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 21839ACE148403C400F978BA /* Build configuration list for PBXNativeTarget "sixense_simple3d_x86_64" */;
+			buildPhases = (
+				21839AC1148403C400F978BA /* Sources */,
+				21839AC2148403C400F978BA /* Frameworks */,
+				21839AC3148403C400F978BA /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = sixense_simple3d_x86_64;
+			productName = sixense_simple3d_x86_64;
+			productReference = 21839AC5148403C400F978BA /* sixense_simple3d */;
+			productType = "com.apple.product-type.tool";
+		};
+		2185354A147DD0D500C24A68 /* freeglut_i386 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2185354E147DD0D500C24A68 /* Build configuration list for PBXNativeTarget "freeglut_i386" */;
+			buildPhases = (
+				21853547147DD0D500C24A68 /* Sources */,
+				21853548147DD0D500C24A68 /* Frameworks */,
+				21853549147DD0D500C24A68 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = freeglut_i386;
+			productName = freeglut_i386;
+			productReference = 2185354B147DD0D500C24A68 /* libfreeglut.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		21853534147DD0AB00C24A68 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
+			buildConfigurationList = 21853537147DD0AB00C24A68 /* Build configuration list for PBXProject "freeglut" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 21853532147DD0AB00C24A68;
+			productRefGroup = 2185353E147DD0AB00C24A68 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2185354A147DD0D500C24A68 /* freeglut_i386 */,
+				21839A9D1484005200F978BA /* freeglut_x86_64 */,
+				21839AA51484007F00F978BA /* sixense_simple3d_i386 */,
+				21839AC4148403C400F978BA /* sixense_simple3d_x86_64 */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		21839A9A1484005200F978BA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				21839AD11484046400F978BA /* freeglut_stroke_mono_roman.c in Sources */,
+				21839AD21484046800F978BA /* freeglut_stroke_roman.c in Sources */,
+				21839AD31484046B00F978BA /* freeglut_structure.c in Sources */,
+				21839AD51484047100F978BA /* freeglut_teapot.c in Sources */,
+				21839AD61484047500F978BA /* freeglut_videoresize.c in Sources */,
+				21839AD71484047900F978BA /* freeglut_window.c in Sources */,
+				21839AD91484048000F978BA /* freeglut_font_data.c in Sources */,
+				21839ADA1484048900F978BA /* freeglut_font.c in Sources */,
+				21839ADB1484048D00F978BA /* freeglut_gamemode.c in Sources */,
+				21839ADC1484049100F978BA /* freeglut_geometry.c in Sources */,
+				21839ADD1484049400F978BA /* freeglut_glutfont_definitions.c in Sources */,
+				21839ADE1484049700F978BA /* freeglut_init.c in Sources */,
+				21839ADF1484049B00F978BA /* freeglut_input_devices.c in Sources */,
+				21839AE1148404A200F978BA /* freeglut_joystick.c in Sources */,
+				21839AE2148404A600F978BA /* freeglut_main.c in Sources */,
+				21839AE3148404A900F978BA /* freeglut_menu.c in Sources */,
+				21839AE4148404AC00F978BA /* freeglut_misc.c in Sources */,
+				21839AE5148404B000F978BA /* freeglut_overlay.c in Sources */,
+				21839AE6148404B300F978BA /* freeglut_spaceball.c in Sources */,
+				21839AE7148404B700F978BA /* freeglut_state.c in Sources */,
+				21839AE9148404BD00F978BA /* freeglut_callbacks.c in Sources */,
+				21839AEA148404C000F978BA /* freeglut_cursor.c in Sources */,
+				21839AEB148404C300F978BA /* freeglut_display.c in Sources */,
+				21839AEC148404C700F978BA /* freeglut_ext.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		21839AA21484007F00F978BA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				21839ABC148402EE00F978BA /* sixense_simple3d.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		21839AC1148403C400F978BA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				21839AED148404D600F978BA /* sixense_simple3d.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		21853547147DD0D500C24A68 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				21853554147DD16200C24A68 /* freeglut_callbacks.c in Sources */,
+				21853555147DD16200C24A68 /* freeglut_cursor.c in Sources */,
+				21853556147DD16200C24A68 /* freeglut_display.c in Sources */,
+				21853557147DD16200C24A68 /* freeglut_ext.c in Sources */,
+				21853569147DD1B300C24A68 /* freeglut_font_data.c in Sources */,
+				2185356A147DD1B300C24A68 /* freeglut_font.c in Sources */,
+				2185356B147DD1B300C24A68 /* freeglut_gamemode.c in Sources */,
+				2185356C147DD1B300C24A68 /* freeglut_geometry.c in Sources */,
+				2185356D147DD1B300C24A68 /* freeglut_glutfont_definitions.c in Sources */,
+				2185356E147DD1B300C24A68 /* freeglut_init.c in Sources */,
+				2185356F147DD1B300C24A68 /* freeglut_input_devices.c in Sources */,
+				21853571147DD1B300C24A68 /* freeglut_joystick.c in Sources */,
+				21853572147DD1B300C24A68 /* freeglut_main.c in Sources */,
+				21853573147DD1B300C24A68 /* freeglut_menu.c in Sources */,
+				21853574147DD1B300C24A68 /* freeglut_misc.c in Sources */,
+				21853575147DD1B300C24A68 /* freeglut_overlay.c in Sources */,
+				21853576147DD1B300C24A68 /* freeglut_spaceball.c in Sources */,
+				21853577147DD1B300C24A68 /* freeglut_state.c in Sources */,
+				21853581147DD1E800C24A68 /* freeglut_stroke_mono_roman.c in Sources */,
+				21853582147DD1E800C24A68 /* freeglut_stroke_roman.c in Sources */,
+				21853583147DD1E800C24A68 /* freeglut_structure.c in Sources */,
+				21853585147DD1E800C24A68 /* freeglut_teapot.c in Sources */,
+				21853586147DD1E800C24A68 /* freeglut_videoresize.c in Sources */,
+				21853587147DD1E800C24A68 /* freeglut_window.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		21839AA01484005200F978BA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				EXECUTABLE_EXTENSION = dylib;
+				EXECUTABLE_PREFIX = lib;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				INSTALL_PATH = "@executable_path";
+				LIBRARY_SEARCH_PATHS = "$(DEVELOPER_SDK_DIR)/MacOSX$(MACOSX_DEPLOYMENT_TARGET).sdk/usr/X11/lib";
+				MACH_O_TYPE = mh_dylib;
+				OTHER_LDFLAGS = (
+					"-lX11",
+					"-lGL",
+				);
+				PRODUCT_NAME = freeglut;
+				USER_HEADER_SEARCH_PATHS = "$(DEVELOPER_SDK_DIR)/MacOSX$(MACOSX_DEPLOYMENT_TARGET).sdk/usr/X11/include $(SRCROOT)/../include";
+			};
+			name = Debug;
+		};
+		21839AA11484005200F978BA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				EXECUTABLE_EXTENSION = dylib;
+				EXECUTABLE_PREFIX = lib;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				INSTALL_PATH = "@executable_path";
+				LIBRARY_SEARCH_PATHS = "$(DEVELOPER_SDK_DIR)/MacOSX$(MACOSX_DEPLOYMENT_TARGET).sdk/usr/X11/lib";
+				MACH_O_TYPE = mh_dylib;
+				OTHER_LDFLAGS = (
+					"-lX11",
+					"-lGL",
+				);
+				PRODUCT_NAME = freeglut;
+				USER_HEADER_SEARCH_PATHS = "$(DEVELOPER_SDK_DIR)/MacOSX$(MACOSX_DEPLOYMENT_TARGET).sdk/usr/X11/include $(SRCROOT)/../include";
+			};
+			name = Release;
+		};
+		21839AAE1484007F00F978BA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../lib/OSX/release_dll\"",
+					"$(DEVELOPER_SDK_DIR)/MacOSX$(MACOSX_DEPLOYMENT_TARGET).sdk/usr/X11/lib",
+				);
+				OTHER_LDFLAGS = (
+					"-lX11",
+					"-lGL",
+				);
+				PRODUCT_NAME = sixense_simple3d;
+				USER_HEADER_SEARCH_PATHS = "$(DEVELOPER_SDK_DIR)/MacOSX$(MACOSX_DEPLOYMENT_TARGET).sdk/usr/X11/include $(SRCROOT)/../include $(SRCROOT)/../../../include $(SRCROOT)/../../../include/sixense_utils";
+			};
+			name = Debug;
+		};
+		21839AAF1484007F00F978BA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../lib/OSX/release_dll\"",
+					"$(DEVELOPER_SDK_DIR)/MacOSX$(MACOSX_DEPLOYMENT_TARGET).sdk/usr/X11/lib",
+				);
+				OTHER_LDFLAGS = (
+					"-lX11",
+					"-lGL",
+				);
+				PRODUCT_NAME = sixense_simple3d;
+				USER_HEADER_SEARCH_PATHS = "$(DEVELOPER_SDK_DIR)/MacOSX$(MACOSX_DEPLOYMENT_TARGET).sdk/usr/X11/include $(SRCROOT)/../include $(SRCROOT)/../../../include $(SRCROOT)/../../../include/sixense_utils";
+			};
+			name = Release;
+		};
+		21839ACC148403C400F978BA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				LD_DYLIB_INSTALL_NAME = "";
+				LD_RUNPATH_SEARCH_PATHS = "";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../lib/OSX_x64/release_dll\"",
+					"$(DEVELOPER_SDK_DIR)/MacOSX$(MACOSX_DEPLOYMENT_TARGET).sdk/usr/X11/lib",
+				);
+				OTHER_LDFLAGS = (
+					"-lX11",
+					"-lGL",
+				);
+				PRODUCT_NAME = sixense_simple3d;
+				USER_HEADER_SEARCH_PATHS = "$(DEVELOPER_SDK_DIR)/MacOSX$(MACOSX_DEPLOYMENT_TARGET).sdk/usr/X11/include $(SRCROOT)/../include $(SRCROOT)/../../../include $(SRCROOT)/../../../include/sixense_utils";
+			};
+			name = Debug;
+		};
+		21839ACD148403C400F978BA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				LD_DYLIB_INSTALL_NAME = "";
+				LD_RUNPATH_SEARCH_PATHS = "";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../lib/OSX_x64/release_dll\"",
+					"$(DEVELOPER_SDK_DIR)/MacOSX$(MACOSX_DEPLOYMENT_TARGET).sdk/usr/X11/lib",
+				);
+				OTHER_LDFLAGS = (
+					"-lX11",
+					"-lGL",
+				);
+				PRODUCT_NAME = sixense_simple3d;
+				USER_HEADER_SEARCH_PATHS = "$(DEVELOPER_SDK_DIR)/MacOSX$(MACOSX_DEPLOYMENT_TARGET).sdk/usr/X11/include $(SRCROOT)/../include $(SRCROOT)/../../../include $(SRCROOT)/../../../include/sixense_utils";
+			};
+			name = Release;
+		};
+		2185353F147DD0AB00C24A68 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		21853540147DD0AB00C24A68 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		2185354C147DD0D500C24A68 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				EXECUTABLE_EXTENSION = dylib;
+				EXECUTABLE_PREFIX = lib;
+				INSTALL_PATH = "@executable_path";
+				LIBRARY_SEARCH_PATHS = "$(DEVELOPER_SDK_DIR)/MacOSX$(MACOSX_DEPLOYMENT_TARGET).sdk/usr/X11/lib";
+				MACH_O_TYPE = mh_dylib;
+				OTHER_LDFLAGS = (
+					"-lX11",
+					"-lGL",
+				);
+				PRODUCT_NAME = freeglut;
+				USER_HEADER_SEARCH_PATHS = "$(DEVELOPER_SDK_DIR)/MacOSX$(MACOSX_DEPLOYMENT_TARGET).sdk/usr/X11/include $(SRCROOT)/../include";
+			};
+			name = Debug;
+		};
+		2185354D147DD0D500C24A68 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				EXECUTABLE_EXTENSION = dylib;
+				EXECUTABLE_PREFIX = lib;
+				INSTALL_PATH = "@executable_path";
+				LIBRARY_SEARCH_PATHS = "$(DEVELOPER_SDK_DIR)/MacOSX$(MACOSX_DEPLOYMENT_TARGET).sdk/usr/X11/lib";
+				MACH_O_TYPE = mh_dylib;
+				OTHER_LDFLAGS = (
+					"-lX11",
+					"-lGL",
+				);
+				PRODUCT_NAME = freeglut;
+				USER_HEADER_SEARCH_PATHS = "$(DEVELOPER_SDK_DIR)/MacOSX$(MACOSX_DEPLOYMENT_TARGET).sdk/usr/X11/include $(SRCROOT)/../include";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		21839A9F1484005200F978BA /* Build configuration list for PBXNativeTarget "freeglut_x86_64" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				21839AA01484005200F978BA /* Debug */,
+				21839AA11484005200F978BA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		21839AAD1484007F00F978BA /* Build configuration list for PBXNativeTarget "sixense_simple3d_i386" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				21839AAE1484007F00F978BA /* Debug */,
+				21839AAF1484007F00F978BA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		21839ACE148403C400F978BA /* Build configuration list for PBXNativeTarget "sixense_simple3d_x86_64" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				21839ACC148403C400F978BA /* Debug */,
+				21839ACD148403C400F978BA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		21853537147DD0AB00C24A68 /* Build configuration list for PBXProject "freeglut" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2185353F147DD0AB00C24A68 /* Debug */,
+				21853540147DD0AB00C24A68 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2185354E147DD0D500C24A68 /* Build configuration list for PBXNativeTarget "freeglut_i386" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2185354C147DD0D500C24A68 /* Debug */,
+				2185354D147DD0D500C24A68 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 21853534147DD0AB00C24A68 /* Project object */;
+}
