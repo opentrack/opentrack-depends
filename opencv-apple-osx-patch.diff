@@ -4,6 +4,8 @@ index 582dcdb..bfae9de 100644
 Using the clang version 'Apple LLVM version 7.0.0 (clang-700.0.72)', we
 need -std=c++11 to link with opentrack which uses -std=c++11.
 
+The SDK that we're targetting is 10.8.
+
 --- a/modules/flann/include/opencv2/flann/lsh_table.h
 +++ b/modules/flann/include/opencv2/flann/lsh_table.h
 @@ -41,7 +41,7 @@
