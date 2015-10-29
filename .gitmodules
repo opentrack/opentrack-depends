@@ -4,6 +4,7 @@
 [submodule "LibOVR"]
 	path = LibOVR
 	url = https://github.com/opentrack/LibOVR.git
+        branch = master
 [submodule "flandmark"]
 	path = flandmark
 	url = https://github.com/uricamic/flandmark.git
