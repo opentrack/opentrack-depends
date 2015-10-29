@@ -13,3 +13,7 @@
 [submodule "opencv"]
 	path = opencv
 	url = https://github.com/Itseez/opencv.git
+[submodule "LibOVR-025"]
+	path = LibOVR-025
+	url = https://github.com/opentrack/LibOVR
+	branch = branch-0.2.5
