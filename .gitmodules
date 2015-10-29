@@ -1,10 +1,6 @@
 [submodule "aruco"]
 	path = aruco
 	url = https://github.com/opentrack/aruco.git
-[submodule "LibOVR"]
-	path = LibOVR
-	url = https://github.com/opentrack/LibOVR.git
-        branch = master
 [submodule "flandmark"]
 	path = flandmark
 	url = https://github.com/uricamic/flandmark.git
@@ -17,4 +13,10 @@
 [submodule "LibOVR-025"]
 	path = LibOVR-025
 	url = https://github.com/opentrack/LibOVR
-	branch = branch-0.2.5
+	branch = branch-025
+[submodule "LibOVR-080"]
+	path = LibOVR-080
+	url = https://github.com/opentrack/LibOVR
+[submodule "LibOVR-042"]
+	path = LibOVR-042
+	url = https://github.com/opentrack/LibOVR
