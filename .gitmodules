@@ -4,12 +4,14 @@
 [submodule "flandmark"]
 	path = flandmark
 	url = https://github.com/uricamic/flandmark.git
+	ignore = dirty
 [submodule "headtracker"]
 	path = headtracker
 	url = https://github.com/sthalik/headtracker.git
 [submodule "opencv"]
 	path = opencv
 	url = https://github.com/Itseez/opencv.git
+	ignore = dirty
 [submodule "LibOVR-025"]
 	path = LibOVR-025
 	url = https://github.com/opentrack/LibOVR
