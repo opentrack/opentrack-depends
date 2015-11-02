@@ -22,3 +22,6 @@
 [submodule "LibOVR-042"]
 	path = LibOVR-042
 	url = https://github.com/opentrack/LibOVR
+[submodule "opentrack.wiki"]
+	path = opentrack.wiki
+	url = git@github.com:opentrack/opentrack.wiki.git
