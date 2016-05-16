@@ -1,0 +1,6 @@
+﻿  stdafx.cpp
+  EyeXHost.cpp
+d:\dev\tobii\samples\activatablebuttons\eyexhost.cpp(158): warning C4477: 'sprintf_s' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'HWND'
+  ActivatableButtons.cpp
+  Generating Code...
+  ActivatableButtons.vcxproj -> D:\dev\tobii\samples\Debug\ActivatableButtons.exe
