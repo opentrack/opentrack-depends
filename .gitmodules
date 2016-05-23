@@ -8,10 +8,6 @@
 [submodule "headtracker"]
 	path = headtracker
 	url = https://github.com/sthalik/headtracker.git
-[submodule "opencv"]
-	path = opencv
-	url = https://github.com/Itseez/opencv.git
-	ignore = dirty
 [submodule "LibOVR-025"]
 	path = LibOVR-025
 	url = https://github.com/opentrack/LibOVR
@@ -25,3 +21,6 @@
 [submodule "opentrack.wiki"]
 	path = opentrack.wiki
 	url = git@github.com:opentrack/opentrack.wiki.git
+[submodule "opencv"]
+	path = opencv
+	url = https://github.com/opentrack/opencv.git
