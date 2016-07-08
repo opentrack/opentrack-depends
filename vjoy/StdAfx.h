@@ -16,4 +16,10 @@
 //{{AFX_INSERT_LOCATION}}
 // Microsoft Visual C++ will insert additional declarations immediately before the previous line.
 
+#ifdef _WIN64
+#pragma comment(lib,"VJoy64.lib")
+#else
+#pragma comment(lib,"VJoy32.lib")
+#endif
+
 #endif // !defined(AFX_STDAFX_H__B4543DD5_284F_4EB2_A6B0_8757CF067C24__INCLUDED_)
