@@ -1,0 +1,3 @@
+The project site's located at http://vjoystick.sourceforge.net/site/
+
+The SDK is at https://sourceforge.net/projects/vjoystick/files/Beta%202.x/SDK/
