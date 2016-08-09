@@ -41,7 +41,7 @@ Revision History:
 #include "PPJIoctl.h"
 #endif
 
-#include <INITGUID.H>	// Definitions for controlling GUID initialization
+#include <initguid.h>	// Definitions for controlling GUID initialization
 
 // Sideband comunication with vJoy Device
 //{781EF630-72B2-11d2-B852-00C04FAD5101}
