@@ -27,3 +27,7 @@
 [submodule "LibOVR-140"]
 	path = LibOVR-140
 	url = https://github.com/opentrack/LibOVR.git
+[submodule "openvr"]
+	path = steamvr
+	url = https://github.com/ValveSoftware/openvr.git
+	branch = master
