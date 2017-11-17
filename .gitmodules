@@ -21,9 +21,6 @@
 [submodule "opentrack.wiki"]
 	path = wiki
 	url = https://github.com/opentrack/opentrack.wiki.git
-[submodule "opencv"]
-	path = opencv
-	url = https://github.com/opentrack/opencv.git
 [submodule "LibOVR-140"]
 	path = LibOVR-140
 	url = https://github.com/opentrack/LibOVR.git
