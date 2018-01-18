@@ -28,7 +28,3 @@
 	path = steamvr
 	url = https://github.com/ValveSoftware/openvr.git
 	branch = master
-[submodule "opencv"]
-	path = opencv
-	url = https://github.com/opentrack/opencv.git
-	branch = fork
