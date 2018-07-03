@@ -1,22 +1,17 @@
 #!/bin/bash
 
-# ./run.sh gemm gemm_settings.txt
-# ./run.sh lazy_gemm lazy_gemm_settings.txt
-# ./run.sh gemv gemv_settings.txt
-# ./run.sh trmv_up gemv_square_settings.txt
-# ...
+# ./run.sh gemm
+# ./run.sh lazy_gemm
 
 # Examples of environment variables to be set:
 #   PREFIX="haswell-fma-"
 #   CXX_FLAGS="-mfma"
-#   CXX=clang++
 
 # Options:
 #   -up : enforce the recomputation of existing data, and keep best results as a merging strategy
 #   -s  : recompute selected changesets only and keep bests
 
 bench=$1
-settings_file=$2
 
 if echo "$*" | grep '\-up' > /dev/null; then
   update=true
@@ -29,16 +24,6 @@ if echo "$*" | grep '\-s' > /dev/null; then
 else
   selected=false
 fi
-
-WORKING_DIR=${PREFIX:?"default"}
-
-if [ -z "$PREFIX" ]; then
-  WORKING_DIR_PREFIX="$WORKING_DIR/"
-else
-  WORKING_DIR_PREFIX="$WORKING_DIR/$PREFIX-"
-fi
-echo "WORKING_DIR_PREFIX=$WORKING_DIR_PREFIX"
-mkdir -p $WORKING_DIR
 
 global_args="$*"
 
@@ -60,7 +45,7 @@ else
   cd ..
 fi
 
-if [ -z "$CXX" ]; then
+if [ ! -z '$CXX' ]; then
   CXX=g++
 fi
 
@@ -103,7 +88,7 @@ function test_current
   fi
   res=$prev
   count_rev=`echo $prev |  wc -w`
-  count_ref=`cat $settings_file |  wc -l`
+  count_ref=`cat $bench"_settings.txt" |  wc -l`
   if echo "$global_args" | grep "$rev" > /dev/null; then
     rev_found=true
   else
@@ -112,9 +97,8 @@ function test_current
 #  echo $update et $selected et $rev_found because $rev et "$global_args"
 #  echo $count_rev et $count_ref
   if [ $update == true ] || [ $count_rev != $count_ref ] || ([ $selected == true ] &&  [ $rev_found == true ]); then
-    echo "RUN: $CXX -O3 -DNDEBUG -march=native $CXX_FLAGS -I eigen_src $bench.cpp -DSCALAR=$scalar -o $name"
-    if $CXX -O3 -DNDEBUG -march=native $CXX_FLAGS -I eigen_src $bench.cpp -DSCALAR=$scalar -o $name; then
-      curr=`./$name $settings_file`
+    if $CXX -O2 -DNDEBUG -march=native $CXX_FLAGS -I eigen_src $bench.cpp -DSCALAR=$scalar -o $name; then
+      curr=`./$name`
       if [ $count_rev == $count_ref ]; then
         echo "merge previous $prev"
         echo "with new       $curr"
@@ -133,9 +117,9 @@ function test_current
   fi
 }
 
-make_backup $WORKING_DIR_PREFIX"s"$bench
-make_backup $WORKING_DIR_PREFIX"d"$bench
-make_backup $WORKING_DIR_PREFIX"c"$bench
+make_backup $PREFIX"s"$bench
+make_backup $PREFIX"d"$bench
+make_backup $PREFIX"c"$bench
 
 cut -f1 -d"#" < changesets.txt | grep -E '[[:alnum:]]' | while read rev
 do
@@ -146,27 +130,27 @@ do
     actual_rev=`hg identify | cut -f1 -d' '`
     cd ..
     
-    test_current $actual_rev float                  $WORKING_DIR_PREFIX"s"$bench
-    test_current $actual_rev double                 $WORKING_DIR_PREFIX"d"$bench
-    test_current $actual_rev "std::complex<double>" $WORKING_DIR_PREFIX"c"$bench
+    test_current $actual_rev float                  $PREFIX"s"$bench
+    test_current $actual_rev double                 $PREFIX"d"$bench
+    test_current $actual_rev "std::complex<double>" $PREFIX"c"$bench
   fi
   
 done
 
 echo "Float:"
-cat $WORKING_DIR_PREFIX"s""$bench.out"
+cat $PREFIX"s""$bench.out"
 echo " "
 
 echo "Double:"
-cat $WORKING_DIR_PREFIX"d""$bench.out"
+cat $PREFIX"d""$bench.out"
 echo ""
 
 echo "Complex:"
-cat $WORKING_DIR_PREFIX"c""$bench.out"
+cat $PREFIX"c""$bench.out"
 echo ""
 
-./make_plot.sh $WORKING_DIR_PREFIX"s"$bench $bench $settings_file
-./make_plot.sh $WORKING_DIR_PREFIX"d"$bench $bench $settings_file
-./make_plot.sh $WORKING_DIR_PREFIX"c"$bench $bench $settings_file
+./make_plot.sh $PREFIX"s"$bench $bench
+./make_plot.sh $PREFIX"d"$bench $bench
+./make_plot.sh $PREFIX"c"$bench $bench
 
 

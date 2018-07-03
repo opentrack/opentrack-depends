@@ -43,8 +43,10 @@
   #else
     #define EIGEN_DEVICE_FUNC
   #endif
+
 #else
   #define EIGEN_DEVICE_FUNC
+
 #endif
 
 // When compiling CUDA device code with NVCC, pull in math functions from the
@@ -141,24 +143,15 @@
     #endif
     #ifdef __AVX2__
       #define EIGEN_VECTORIZE_AVX2
-      #define EIGEN_VECTORIZE_AVX
-      #define EIGEN_VECTORIZE_SSE3
-      #define EIGEN_VECTORIZE_SSSE3
-      #define EIGEN_VECTORIZE_SSE4_1
-      #define EIGEN_VECTORIZE_SSE4_2
     #endif
     #ifdef __FMA__
       #define EIGEN_VECTORIZE_FMA
     #endif
-    #if defined(__AVX512F__)
+    #if defined(__AVX512F__) && defined(EIGEN_ENABLE_AVX512)
       #define EIGEN_VECTORIZE_AVX512
       #define EIGEN_VECTORIZE_AVX2
       #define EIGEN_VECTORIZE_AVX
       #define EIGEN_VECTORIZE_FMA
-      #define EIGEN_VECTORIZE_SSE3
-      #define EIGEN_VECTORIZE_SSSE3
-      #define EIGEN_VECTORIZE_SSE4_1
-      #define EIGEN_VECTORIZE_SSE4_2
       #ifdef __AVX512DQ__
         #define EIGEN_VECTORIZE_AVX512DQ
       #endif
@@ -290,15 +283,6 @@
   #include <intrin.h>
 #endif
 
-#if defined(__SYCL_DEVICE_ONLY__)
-  #undef min
-  #undef max
-  #undef isnan
-  #undef isinf
-  #undef isfinite
-  #include <SYCL/sycl.hpp>
-#endif
-
 /** \brief Namespace containing all symbols from the %Eigen library. */
 namespace Eigen {
 
@@ -363,9 +347,6 @@ using std::ptrdiff_t;
 #include "src/Core/util/StaticAssert.h"
 #include "src/Core/util/XprHelper.h"
 #include "src/Core/util/Memory.h"
-#include "src/Core/util/IntegralConstant.h"
-#include "src/Core/util/SymbolicIndex.h"
-
 
 #include "src/Core/NumTraits.h"
 #include "src/Core/MathFunctions.h"
@@ -376,8 +357,6 @@ using std::ptrdiff_t;
   #include "src/Core/arch/SSE/PacketMath.h"
   #include "src/Core/arch/AVX/PacketMath.h"
   #include "src/Core/arch/AVX512/PacketMath.h"
-  #include "src/Core/arch/SSE/MathFunctions.h"
-  #include "src/Core/arch/AVX/MathFunctions.h"
   #include "src/Core/arch/AVX512/MathFunctions.h"
 #elif defined EIGEN_VECTORIZE_AVX
   // Use AVX for floats and doubles, SSE for integers
@@ -430,8 +409,6 @@ using std::ptrdiff_t;
 // on CUDA devices
 #include "src/Core/arch/CUDA/Complex.h"
 
-#include "src/Core/util/IndexedViewHelper.h"
-#include "src/Core/ArithmeticSequence.h"
 #include "src/Core/IO.h"
 #include "src/Core/DenseCoeffsBase.h"
 #include "src/Core/DenseBase.h"
@@ -473,7 +450,6 @@ using std::ptrdiff_t;
 #include "src/Core/Ref.h"
 #include "src/Core/Block.h"
 #include "src/Core/VectorBlock.h"
-#include "src/Core/IndexedView.h"
 #include "src/Core/Transpose.h"
 #include "src/Core/DiagonalMatrix.h"
 #include "src/Core/Diagonal.h"

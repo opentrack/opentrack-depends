@@ -428,7 +428,7 @@ MatrixBase<Derived>::operator*(const MatrixBase<OtherDerived> &other) const
 template<typename Derived>
 template<typename OtherDerived>
 const Product<Derived,OtherDerived,LazyProduct>
-EIGEN_DEVICE_FUNC MatrixBase<Derived>::lazyProduct(const MatrixBase<OtherDerived> &other) const
+MatrixBase<Derived>::lazyProduct(const MatrixBase<OtherDerived> &other) const
 {
   enum {
     ProductIsValid =  Derived::ColsAtCompileTime==Dynamic

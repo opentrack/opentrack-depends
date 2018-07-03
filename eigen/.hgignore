@@ -28,11 +28,7 @@ activity.png
 *.rej
 log
 patch
-*.patch
 a
 a.*
 lapack/testing
 lapack/reference
-.*project
-.settings
-Makefile

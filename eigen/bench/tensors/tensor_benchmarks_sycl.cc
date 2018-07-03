@@ -5,12 +5,29 @@
 
 #include "tensor_benchmarks.h"
 
+using Eigen::array;
+using Eigen::SyclDevice;
+using Eigen::Tensor;
+using Eigen::TensorMap;
+// Simple functions
+template <typename device_selector>
+cl::sycl::queue sycl_queue() {
+  return cl::sycl::queue(device_selector(), [=](cl::sycl::exception_list l) {
+    for (const auto& e : l) {
+      try {
+        std::rethrow_exception(e);
+      } catch (cl::sycl::exception e) {
+        std::cout << e.what() << std::endl;
+      }
+    }
+  });
+}
+
 #define BM_FuncGPU(FUNC)                                       \
   static void BM_##FUNC(int iters, int N) {                    \
     StopBenchmarkTiming();                                     \
-    cl::sycl::gpu_selector selector; \
-    Eigen::QueueInterface queue(selector);     \
-    Eigen::SyclDevice device(&queue);                          \
+    cl::sycl::queue q = sycl_queue<cl::sycl::gpu_selector>();  \
+    Eigen::SyclDevice device(q);                               \
     BenchmarkSuite<Eigen::SyclDevice, float> suite(device, N); \
     suite.FUNC(iters);                                         \
   }                                                            \
