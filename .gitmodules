@@ -8,16 +8,6 @@
 [submodule "headtracker"]
 	path = headtracker
 	url = https://github.com/sthalik/headtracker.git
-[submodule "LibOVR-025"]
-	path = LibOVR-025
-	url = https://github.com/opentrack/LibOVR
-	branch = branch-025
-[submodule "LibOVR-080"]
-	path = LibOVR-080
-	url = https://github.com/opentrack/LibOVR
-[submodule "LibOVR-042"]
-	path = LibOVR-042
-	url = https://github.com/opentrack/LibOVR
 [submodule "opentrack.wiki"]
 	path = wiki
 	url = https://github.com/opentrack/opentrack.wiki.git
