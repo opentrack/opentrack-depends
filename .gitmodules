@@ -1,16 +1,6 @@
 [submodule "aruco"]
 	path = aruco
 	url = https://github.com/opentrack/aruco.git
-[submodule "flandmark"]
-	path = flandmark
-	url = https://github.com/uricamic/flandmark.git
-	ignore = dirty
-[submodule "headtracker"]
-	path = headtracker
-	url = https://github.com/sthalik/headtracker.git
-[submodule "opentrack.wiki"]
-	path = wiki
-	url = https://github.com/opentrack/opentrack.wiki.git
 [submodule "LibOVR-140"]
 	path = LibOVR-140
 	url = https://github.com/opentrack/LibOVR.git
