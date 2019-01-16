@@ -1,8 +1,0 @@
-﻿  stdafx.cpp
-  EyeXHost.cpp
-d:\dev\tobii\samples\activatableboardgame\eyexhost.cpp(243): warning C4477: 'sprintf_s' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'HWND'
-  ActivatableBoardGame.cpp
-  BoardWindow.cpp
-  Board.cpp
-  Generating Code...
-  ActivatableBoardGame.vcxproj -> D:\dev\tobii\samples\Debug\ActivatableBoardGame.exe
