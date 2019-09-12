@@ -6,5 +6,5 @@
 	url = https://github.com/opentrack/LibOVR.git
 [submodule "openvr"]
 	path = steamvr
-	url = https://github.com/ValveSoftware/openvr.git
+	url = https://github.com/opentrack/openvr.git
 	branch = master
