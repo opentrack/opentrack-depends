@@ -8,3 +8,16 @@
 	path = steamvr
 	url = https://github.com/opentrack/openvr.git
 	branch = master
+[submodule "eigen"]
+	path = eigen
+	url = https://gitlab.com/libeigen/eigen.git
+[submodule "libusb"]
+	path = libusb
+	url = https://github.com/libusb/libusb.git
+[submodule "onnxruntime"]
+	path = onnxruntime
+	url = https://github.com/microsoft/onnxruntime.git
+[submodule "trackhat-c-library-driver"]
+	path = trackhat-c-library-driver
+	url = https://github.com/opentrack/trackhat-c-library-driver.git
+	branch = fixes3
