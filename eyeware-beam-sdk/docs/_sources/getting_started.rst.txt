@@ -1,0 +1,165 @@
+.. toctree::
+   :maxdepth: 2
+
+Getting started
+===============
+
+Requirements
+------------
+
+*  The `Beam application <https://beam.eyeware.tech>`__ is installed on your system;
+*  you have an active subscription, which makes you able to receive head and eye tracking data;
+*  you run the calibration procedure within the Beam application at least once.
+
+In addition, if you want to use the Python API, you need:
+
+*  Python 3.6;
+*  NumPy;
+*  adding ``<YOUR_BEAM_SDK_INSTALLATION_FOLDER>/API/python`` to your ``PYTHONPATH``.
+
+Python example
+--------------
+
+.. code-block:: python
+
+    from eyeware.client import TrackerClient
+    import time
+    import numpy as np
+
+    # Build tracker client, to establish a communication with the tracker server (an Eyeware application).
+    #
+    # Constructing the tracker client object without arguments sets a default server hostname and port which
+    # work fine in many configurations.
+    # However, it is possible to set a specific hostname and port, depending on your setup and network.
+    # See the TrackerClient API reference for further information.
+    tracker = TrackerClient()
+
+    # Run forever, until we press ctrl+c
+    while True:
+        # Make sure that the connection with the tracker server (Eyeware application) is up and running.
+        if tracker.connected:
+
+            print("  * Head Pose:")
+            head_pose = tracker.get_head_pose_info()
+            head_is_lost = head_pose.is_lost
+            print("      - Lost track:       ", head_is_lost)
+            if not head_is_lost:
+                print("      - Session ID:       ", head_pose.track_session_uid)
+                rot = head_pose.transform.rotation
+                print("      - Rotation:          |%5.3f %5.3f %5.3f|" % (rot[0, 0], rot[0, 1], rot[0, 2]))
+                print("                           |%5.3f %5.3f %5.3f|" % (rot[1, 0], rot[1, 1], rot[1, 2]))
+                print("                           |%5.3f %5.3f %5.3f|" % (rot[2, 0], rot[2, 1], rot[2, 2]))
+                tr = head_pose.transform.translation
+                print("      - Translation:       <x=%5.3f m, y=%5.3f m, z=%5.3f m>" % (tr[0], tr[1], tr[2]))
+
+            print("  * Gaze on Screen:")
+            screen_gaze = tracker.get_screen_gaze_info()
+            screen_gaze_is_lost = screen_gaze.is_lost
+            print("      - Lost track:       ", screen_gaze_is_lost)
+            if not screen_gaze_is_lost:
+                print("      - Screen ID:        ", screen_gaze.screen_id)
+                print("      - Coordinates:       <x=%5.3f px,   y=%5.3f px>" % (screen_gaze.x, screen_gaze.y))
+                print("      - Confidence:       ", screen_gaze.confidence)
+
+            time.sleep(1 / 30)  # We expect tracking data at 30 Hz
+        else:
+            # Print a message every MESSAGE_PERIOD_IN_SECONDS seconds
+            MESSAGE_PERIOD_IN_SECONDS = 2
+            time.sleep(MESSAGE_PERIOD_IN_SECONDS - time.monotonic() % MESSAGE_PERIOD_IN_SECONDS)
+            print("No connection with tracker server")
+
+Output
+~~~~~~
+
+Running the example code in a terminal will start printing information in real time.
+There will be a lot of prints, one for each frame.
+Let us zoom on the printed output associated to one frame only:
+
+.. code-block::
+
+    * Head Pose:
+        - Lost track:        False
+        - Session ID:        1
+        - Rotation:          |-0.999 -0.005 -0.045|
+                             |-0.008 0.999 0.051|
+                             |0.045 0.051 -0.998|
+        - Translation:       <x=0.166 m, y=0.181 m, z=0.260 m>
+    * Gaze on Screen:
+        - Lost track:        False
+        - Screen ID:         0
+        - Coordinates:       <x=698.000 px,   y=149.000 px>
+        - Confidence:        TrackingConfidence.HIGH
+
+For the meaning of the returned fields, refer to the section :ref:`API overview`.
+
+Explanation
+-----------
+
+When creating a Python script with the purpose of consuming head and eye tracking information from Beam SDK, you must ensure that the basic classes are correctly imported:
+
+.. code-block:: python
+
+    from eyeware.client import TrackerClient
+
+We can build a ``TrackerClient`` object, which is the main entry point of Beam SDK (see :ref:`API overview` for further details):
+
+.. code-block:: python
+
+    tracker = TrackerClient()
+
+Then, we verify that the connection between our client object and the tracker server (Eyeware application) is up and running as follows:
+
+.. code-block:: python
+
+    if tracker.connected:
+
+and we are now ready to receive head and gaze tracking data, doing something with that data.
+
+Let us start from the head tracking part.
+First, we will retrieve the head tracking information data structure.
+Then, we will check whether tracking information is valid for the current frame.
+In code:
+
+.. code-block:: python
+
+    print("  * Head Pose:")
+    head_pose = tracker.get_head_pose_info()
+    head_is_lost = head_pose.is_lost
+    print("      - Lost track:       ", head_is_lost)
+
+If the head tracking information is indeed valid (i.e., head tracking was *not lost*), then we retrieve the 3D coordinates of the tracked person's head:
+
+.. code-block:: python
+
+    if not head_is_lost:
+        print("      - Session ID:       ", head_pose.track_session_uid)
+        rot = head_pose.transform.rotation
+        print("      - Rotation:          |%5.3f %5.3f %5.3f|" % (rot[0, 0], rot[0, 1], rot[0, 2]))
+        print("                           |%5.3f %5.3f %5.3f|" % (rot[1, 0], rot[1, 1], rot[1, 2]))
+        print("                           |%5.3f %5.3f %5.3f|" % (rot[2, 0], rot[2, 1], rot[2, 2]))
+        tr = head_pose.transform.translation
+        print("      - Translation:       <x=%5.3f m, y=%5.3f m, z=%5.3f m>" % (tr[0], tr[1], tr[2]))
+
+For details about the rotation and translation notation, refer to the section :ref:`API overview`.
+
+Now, we want to get screen gaze tracking information.
+This follows the same logic that we applied for head tracking information.
+First, retrieve the screen gaze information data structure.
+Then, check the data validity (whether tracking is *not lost*):
+
+.. code-block:: python
+
+    print("  * Gaze on Screen:")
+    screen_gaze = tracker.get_screen_gaze_info()
+    screen_gaze_is_lost = screen_gaze.is_lost
+    print("      - Lost track:       ", screen_gaze_is_lost)
+    if not screen_gaze_is_lost:
+        print("      - Screen ID:        ", screen_gaze.screen_id)
+        print("      - Coordinates:       <x=%5.3f px,   y=%5.3f px>" % (screen_gaze.x, screen_gaze.y))
+        print("      - Confidence:       ", screen_gaze.confidence)
+
+The rest of the example code is about printing head and gaze tracking data numbers on the terminal.
+Printing those numbers, by itself, is not very useful or interesting.
+Instead, you can exploit the Beam SDK tracking data for building your own creative applications!
+Let us know how it goes at contact@eyeware.tech.
+We would love to hear about your projects.

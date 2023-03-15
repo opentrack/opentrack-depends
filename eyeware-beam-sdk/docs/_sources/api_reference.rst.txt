@@ -1,0 +1,76 @@
+.. toctree::
+   :maxdepth: 2
+
+API reference
+=============
+
+C++
+---
+
+.. doxygenclass:: eyeware::TrackerClient
+   :project: Beam_SDK_docs
+   :members:
+
+.. doxygenstruct:: eyeware::HeadPoseInfo
+   :project: Beam_SDK_docs
+   :members:
+
+.. doxygenstruct:: eyeware::ScreenGazeInfo
+   :project: Beam_SDK_docs
+   :members:
+
+.. doxygenenum:: eyeware::TrackingConfidence
+   :project: Beam_SDK_docs
+
+.. doxygenstruct:: eyeware::AffineTransform3D
+   :project: Beam_SDK_docs
+   :members:
+
+.. doxygentypedef:: eyeware::Matrix3x3
+   :project: Beam_SDK_docs
+
+.. doxygenstruct:: eyeware::Vector3D
+   :project: Beam_SDK_docs
+   :members:
+
+Python
+------
+
+.. autoclass:: eyeware.client.TrackerClient
+   :members:
+   :exclude-members: connected
+
+   .. autoproperty:: connected
+
+      .. versionadded:: 1.1.0
+
+.. autoclass:: eyeware.client.HeadPoseInfo
+   :members:
+
+.. autoclass:: eyeware.client.ScreenGazeInfo
+   :members:
+
+.. autoclass:: eyeware.client.TrackingConfidence
+
+.. autoclass:: eyeware.client.AffineTransform3D
+   :members:
+
+.. autoclass:: eyeware.client.Vector3D
+   :members:
+
+.. note::
+   Matrix and vector types, such as the rotation and translation properties of ``AffineTransform3D``, can be transformed to NumPy arrays efficiently.
+   This is useful for using tracking data and coordinates in your application.
+   Example:
+
+   .. code-block:: python
+
+      # Receive an AffineTransform3D instance
+      head_pose = tracker.get_head_pose_info()
+      # Transform the tracking information to standard NumPy arrays
+      import numpy as np
+      rotation_numpy = np.array(head_pose.rotation, copy=False)
+      translation_numpy = np.array(head_pose.translation, copy=False)
+      # Now we can manipulate tracking information to do several things:
+      # draw tracking coordinates on the screen, save them for statistics/heatmaps,
+      # perform arithmetic operations on them, trigger interactive behaviors based on thresholds, etc.
