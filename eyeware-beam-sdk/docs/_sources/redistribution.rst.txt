@@ -1,0 +1,34 @@
+.. toctree::
+   :maxdepth: 2
+
+Redistributing a Beam client application
+========================================
+
+For developers
+--------------
+
+To distribute an application embedding the functionality provided by Beam SDK, you need to deploy the necessary libraries, modules or extra files from the Beam SDK package.
+This ensures that your application will function as intended for your end users.
+
+The file `<CREDITS.pdf>`_ displays the licenses of third party libraries that Beam SDK depends on.
+
+C++ API
+~~~~~~~
+
+The necessary files are in the folder ``API/cpp/lib``.
+Copy them next to the executable of your application.
+
+Python API
+~~~~~~~~~~
+
+The necessary files are in the folder ``API/python``.
+Keep the structure of that folder, including any subfolders contained therein.
+Copy the files next to the "executable" (Python interpreter) of your application.
+
+For end users
+-------------
+
+Your end users simply need to:
+
+*  have the Eyeware Beam app installed;
+*  have an active subscription for the Eyeware Beam app.
