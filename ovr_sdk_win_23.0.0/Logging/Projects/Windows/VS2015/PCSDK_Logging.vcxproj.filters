@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="..\..\..\PCSDK_Logging_dependency.props" />
+    <None Include="PCSDK_Logging_internal.props" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Logging">
+      <UniqueIdentifier>{1131b44d-3c37-4e67-98be-d3820108c671}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{8090b7c1-d4a9-450b-ab8c-eeca877db86c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\internal">
+      <UniqueIdentifier>{d213a0aa-e383-41d3-8d35-2e48239d33af}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Logging\Logging_Library.h">
+      <Filter>Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Logging\Logging_OutputPlugins.h">
+      <Filter>Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Logging\Logging_Tools.h">
+      <Filter>Logging</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\Logging_Library.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\Logging_OutputPlugins.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\Logging_Tools.cpp">
+      <Filter>src\internal</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <!-- Add required include roots here, separated by semicolon -->
+      <!-- Eg. $(MSBuildThisFileDirectory); -->
+      <AdditionalIncludeDirectories>$(MSBuildThisFileDirectory);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectReference Include="$(MSBuildThisFileDirectory)\Projects\Windows\$(VSDIR)\PCSDK_Logging.vcxproj">
+      <Project>{08ea9e99-1abe-41b3-9498-51a7824bfca5}</Project>
+      <Private>false</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <!-- Public dependencies -->
+  <!-- /Public dependencies -->
+  <PropertyGroup>
+    <__PCSDK_Logging_dependency>true</__PCSDK_Logging_dependency>
+  </PropertyGroup>
+</Project>

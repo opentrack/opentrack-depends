@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--
+      BeforeClCompile ensures that intermediate directories are made whether
+      you're you're building one file or the whole solution. Also, The v4.0
+      targets properly re-use the BeforeClCompileTargets, as opposed to
+      BuildDependsOn or CompileDependsOn which force including targets at
+      the bottom of the project file.
+  -->
+  <Target Name="PathHacks">
+    <!-- Shorten input paths only if we're not doing 'Select Compile' -->
+    <ItemGroup Condition="@(ClCompile) != '' And @(SelectedFiles) == ''">
+      <!--
+        Reassign the Include to be an absolute resolved path, not relative to the project.
+      -->
+      <ClCompileCopy Include="@(ClCompile->'%(FullPath)')" />
+      <!--
+        Clear old ClCompile, insert ClCompileCopy
+      -->
+      <ClCompile Remove="@(ClCompile)" />
+      <ClCompile Include="@(ClCompileCopy)" />
+      <ClCompileCopy Remove="@(ClCompileCopy)" />
+    </ItemGroup>
+    <!-- Always shorten intermediates though. -->
+    <ItemGroup Condition="@(ClCompile) != ''">
+      <ClCompileCopy Include="@(ClCompile)">
+        <ObjectFileName>$(IntDir)$([MSBuild]::MakeRelative($(ovrsource_root), %(ClCompile.RootDir)%(ClCompile.Directory)))/</ObjectFileName>
+      </ClCompileCopy>
+      <ClCompile Remove="@(ClCompile)"/>
+      <ClCompile Include="@(ClCompileCopy)"/>
+      <ClCompileCopy Remove="@(ClCompileCopy)"/>
+    </ItemGroup>
+    <!-- Sometimes intermediates get too long. That's not good. Shorten directory to the hashcode in those cases. -->
+    <ItemGroup Condition="@(ClCompile) != ''">
+      <ClCompileCopy Include="@(ClCompile)">
+        <ObjectFileName Condition="$([System.String]::new('%(ClCompile.ObjectFileName)').get_Length()) &gt; 200">$(IntDir)$([System.String]::new('%(ClCompile.ObjectFileName)').GetHashCode())/</ObjectFileName>
+      </ClCompileCopy>
+      <ClCompile Remove="@(ClCompile)"/>
+      <ClCompile Include="@(ClCompileCopy)"/>
+      <ClCompileCopy Remove="@(ClCompileCopy)"/>
+    </ItemGroup>
+  </Target>
+  <PropertyGroup>
+    <ComputeCompileInputsTargets>
+      PathHacks;
+      $(ComputeCompileInputsTargets);
+      <!-- Ensures that folders get created for SelectClCompile based on new paths. -->
+      MakeDirsForCl;
+    </ComputeCompileInputsTargets>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros">
+    <!-- Add new values to the _bottom_ of each section, so it gets inserted at the _head_ of the path -->
+    <!-- include path -->
+    <Win10SDK_IncPath>C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\shared;C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\um;C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\km;C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\winrt;C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt;$(Win10SDK_IncPath)</Win10SDK_IncPath>
+    <Win10SDK_IncPath>C:\Program Files (x86)\Windows Kits\10\Include\10.0.10586.0\shared;C:\Program Files (x86)\Windows Kits\10\Include\10.0.10586.0\um;C:\Program Files (x86)\Windows Kits\10\Include\10.0.10586.0\km;C:\Program Files (x86)\Windows Kits\10\Include\10.0.10586.0\winrt;C:\Program Files (x86)\Windows Kits\10\Include\10.0.10586.0\ucrt;$(Win10SDK_IncPath)</Win10SDK_IncPath>
+    <Win10SDK_IncPath>C:\Program Files (x86)\Windows Kits\10\Include\10.0.14393.0\shared;C:\Program Files (x86)\Windows Kits\10\Include\10.0.14393.0\um;C:\Program Files (x86)\Windows Kits\10\Include\10.0.14393.0\km;C:\Program Files (x86)\Windows Kits\10\Include\10.0.14393.0\winrt;C:\Program Files (x86)\Windows Kits\10\Include\10.0.14393.0\ucrt;$(Win10SDK_IncPath)</Win10SDK_IncPath>
+    <Win10SDK_IncPath>C:\Program Files (x86)\Windows Kits\10\Include\10.0.15063.0\shared;C:\Program Files (x86)\Windows Kits\10\Include\10.0.15063.0\um;C:\Program Files (x86)\Windows Kits\10\Include\10.0.15063.0\km;C:\Program Files (x86)\Windows Kits\10\Include\10.0.15063.0\winrt;C:\Program Files (x86)\Windows Kits\10\Include\10.0.15063.0\ucrt;$(Win10SDK_IncPath)</Win10SDK_IncPath>
+    <Win10SDK_IncPath>C:\Program Files (x86)\Windows Kits\10\Include\10.0.16299.0\shared;C:\Program Files (x86)\Windows Kits\10\Include\10.0.16299.0\um;C:\Program Files (x86)\Windows Kits\10\Include\10.0.16299.0\km;C:\Program Files (x86)\Windows Kits\10\Include\10.0.16299.0\winrt;C:\Program Files (x86)\Windows Kits\10\Include\10.0.16299.0\ucrt;$(Win10SDK_IncPath)</Win10SDK_IncPath>
+    <!-- x86 lib path -->
+    <Win10SDK_LibPathx86>C:\Program Files (x86)\Windows Kits\10\Lib\10.0.10240.0\um\x86;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.10240.0\km\x86;$(Win10SDK_LibPathx86)</Win10SDK_LibPathx86>
+    <Win10SDK_LibPathx86>C:\Program Files (x86)\Windows Kits\10\Lib\10.0.10586.0\um\x86;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.10586.0\km\x86;$(Win10SDK_LibPathx86)</Win10SDK_LibPathx86>
+    <Win10SDK_LibPathx86>C:\Program Files (x86)\Windows Kits\10\Lib\10.0.14393.0\um\x86;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.14393.0\km\x86;$(Win10SDK_LibPathx86)</Win10SDK_LibPathx86>
+    <Win10SDK_LibPathx86>C:\Program Files (x86)\Windows Kits\10\Lib\10.0.15063.0\um\x86;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.15063.0\km\x86;$(Win10SDK_LibPathx86)</Win10SDK_LibPathx86>
+    <Win10SDK_LibPathx86>C:\Program Files (x86)\Windows Kits\10\Lib\10.0.16299.0\um\x86;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.16299.0\km\x86;$(Win10SDK_LibPathx86)</Win10SDK_LibPathx86>
+    <!-- x64 lib path -->
+    <Win10SDK_LibPathx64>C:\Program Files (x64)\Windows Kits\10\Lib\10.0.10240.0\um\x64;C:\Program Files (x64)\Windows Kits\10\Lib\10.0.10240.0\km\x64;$(Win10SDK_LibPathx64)</Win10SDK_LibPathx64>
+    <Win10SDK_LibPathx64>C:\Program Files (x64)\Windows Kits\10\Lib\10.0.10586.0\um\x64;C:\Program Files (x64)\Windows Kits\10\Lib\10.0.10586.0\km\x64;$(Win10SDK_LibPathx64)</Win10SDK_LibPathx64>
+    <Win10SDK_LibPathx64>C:\Program Files (x64)\Windows Kits\10\Lib\10.0.14393.0\um\x64;C:\Program Files (x64)\Windows Kits\10\Lib\10.0.14393.0\km\x64;$(Win10SDK_LibPathx64)</Win10SDK_LibPathx64>
+    <Win10SDK_LibPathx64>C:\Program Files (x64)\Windows Kits\10\Lib\10.0.15063.0\um\x64;C:\Program Files (x64)\Windows Kits\10\Lib\10.0.15063.0\km\x64;$(Win10SDK_LibPathx64)</Win10SDK_LibPathx64>
+    <Win10SDK_LibPathx64>C:\Program Files (x64)\Windows Kits\10\Lib\10.0.16299.0\um\x64;C:\Program Files (x64)\Windows Kits\10\Lib\10.0.16299.0\km\x64;$(Win10SDK_LibPathx64)</Win10SDK_LibPathx64>
+  </PropertyGroup>
+  <PropertyGroup />
+  <ItemDefinitionGroup />
+  <ItemGroup>
+    <BuildMacro Include="Win10SDK_IncPath">
+      <Value>$(Win10SDK_IncPath)</Value>
+      <EnvironmentVariable>true</EnvironmentVariable>
+    </BuildMacro>
+    <BuildMacro Include="Win10SDK_LibPathx86">
+      <Value>$(Win10SDK_LibPathx86)</Value>
+      <EnvironmentVariable>true</EnvironmentVariable>
+    </BuildMacro>
+    <BuildMacro Include="Win10SDK_LibPathx64">
+      <Value>$(Win10SDK_LibPathx64)</Value>
+      <EnvironmentVariable>true</EnvironmentVariable>
+    </BuildMacro>
+  </ItemGroup>
+</Project>

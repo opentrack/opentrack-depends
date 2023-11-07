@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildThisFileDirectory)/OVRRootPath.props" Condition="Exists('$(MSBuildThisFileDirectory)/OVRRootPath.props') And '$(OVRSDKROOT)' == ''" />
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(MSBuildThisFileDirectory)/.msvc/common.props" Condition="Exists('$(MSBuildThisFileDirectory)/.msvc/common.props')" />
+    <Import Project="$(MSBuildThisFileDirectory)/common_internal.props" Condition="Exists('$(MSBuildThisFileDirectory)/common_internal.props') And '$(__pcsdk_common_internal)' != 'true'" />
+  </ImportGroup>
+</Project>

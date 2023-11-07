@@ -21,3 +21,10 @@
 	path = trackhat-c-library-driver
 	url = https://github.com/opentrack/trackhat-c-library-driver.git
 	branch = fixes3
+[submodule "oscpack"]
+	path = oscpack
+	url = https://github.com/CINPLA/oscpack
+[submodule "opencv"]
+	path = opencv
+	url = https://github.com/opencv/opencv.git
+	branch = 4.x

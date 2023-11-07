@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--
+      Shared common variables which may be referenced in other parts of the build.
+      - OutRoot defines a common folder to place binary artifacts in.
+      - ObjRoot defines a common folder to place intermediate build artifacts in.
+      - BuildConfig is a string which can uniquely identify the build configuration. The string is a
+        superset of the $(Configuration)|$(Platform) tuple usually seen in VC++ builds, because it
+        also encodes the specific compiler and toolset version used.
+        As an example, msvc-v141-Debug-x64 is for the VS2017 toolchain, version 141, Debug
+        configuration, targeting x86-64.
+        clang-7.0.0-Release_LTO-x64, conversely, would be the clang toolchain, version 7.0.0,
+        Release_LTO configuration, targeting x86-64.
+      - GenDir is similar to OutDir or IntDir, which are well known folders used by MSBuild
+        for placing outputs and intermediates into, but is used by us for a location where
+        generated source can go, such as build time generated headers.
+      - VSDIR can be used for switching paths based on whether they correspond to VS2017 or
+        VS2015. This is mostly useful for importing the correct version of a project file
+        from an _dependency.props file that is used by both VS2015 and VS2017 projects. These
+        should only be legacy projects - new projects in ovrsource should use VS2017 unless
+        otherwise required.
+  -->
+  <PropertyGroup Label="UserMacros">
+    <OutRoot>$(ovrsource_root).build/bin</OutRoot>
+    <ObjRoot>$(ovrsource_root).build/obj</ObjRoot>
+    <BuildConfig>msvc-$(PlatformToolset)-$(Platform)-$(Configuration)</BuildConfig>
+    <!-- GenDir must have backslashes so the value can be referenced from .bat files -->
+    <GenDir>$(ovrsource_root).build\gen\$(BuildConfig)\$(ProjectName)\</GenDir>
+    <VSDIR Condition="'$(PlatformToolset)' == 'v141'">VS2017</VSDIR>
+    <VSDIR Condition="'$(PlatformToolset)' == 'v140'">VS2015</VSDIR>
+  </PropertyGroup>
+  <!--
+    These are 'well known' properties which define where MSBuild chooses to place outputs
+    and intermediates. IntDir is separated by $(ProjectName) to allow different projects
+    to selectively compile the same source, without trampling on each others intermediates.
+  -->
+  <PropertyGroup>
+    <OutDir>$(OutRoot)/$(BuildConfig)/</OutDir>
+    <IntDir>$(ObjRoot)/$(BuildConfig)/$(ProjectName)/</IntDir>
+  </PropertyGroup>
+  <!--
+      Base compilation settings which define defaults for all projects, debug and release builds.
+      - All builds have $(GenDir) inserted to the include path, to handle generated artifacts.
+      - OldStyle debug information embeds symbols into objects files and libs, so separate pdbs
+        are not needed nor produced until link time. This also generates better debug information
+        for optimized builds.
+      - SyncCThrow instructs the compiler to assume extern "C" code may throw C++ exceptions,
+        because sometimes a raw C interface may be backed by C++ code.
+      - FunctionLevelLinking is required to enable certain optimizations and incurs no penalty on
+        generated code.
+      - MinimalRebuild disables attempts by MSBuild to intelligently not rebuild source files which
+        had transitive headers changed, because it has been known to be buggy and under-rebuild at
+        times.
+      - MultiProcessorCompilation enables additional parallelization of the build process.
+      - SDLCheck enables additional compilation time warnings, and adds runtime security checks
+        around buffers to detect overruns from exploitation or accidents. Performance sensitive code
+        should selectively disable this, after appropriate measurement.
+        See https://msdn.microsoft.com/en-us/library/jj161081.aspx for more information.
+      - StringPooling instructs the compiler to coalesce all identical C string literals to a single
+        runtime instance. On older compilers, this was used to workaround codegen bugs, but is
+        essentially a free optimization.
+  -->
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(GenDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>OldStyle</DebugInformationFormat>
+      <ExceptionHandling>SyncCThrow</ExceptionHandling>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <MinimalRebuild>false</MinimalRebuild>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <SDLCheck>true</SDLCheck>
+      <StringPooling>true</StringPooling>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <!--
+      Debug builds additionally:
+      - Disable optimizations.
+      - Define _DEBUG.
+      - Use the debug static CRT.
+  -->
+  <ItemDefinitionGroup Condition="$(Configuration.Contains('Debug'))">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <!--
+      Release builds:
+      - Optimize for speed (/O2).
+      - Enable intrinsic functions. This allows the compiler to replace certain functions with
+        optimized assembly equivalents, instead of automatically compiled source implementations.
+      - Define NDEBUG.
+      - Use the release static CRT.
+      - Do not use Whole Program Optimization (different from profile guided optimization). This is
+        also known as Link Time Code Generation (LTCG), and LTO with clang. LTCG incurs significant
+        compilation and link time cost, and should only be used when it provides measureable
+        benefit. Additionally, at least one bug was experienced with older compilers and mixing LTCG
+        and non-LTCG code, so this is disabled by default.
+      The linker additionally adds some optimizations:
+      - COMDAT folding allows the linker to coalesce identical function bodies into a single
+        instance. This is especially useful for template function definitions which do not vary
+        based on the template arguments. FunctionLevelLinking is required for this optimization.
+      - OptimizeReferences allows the linker to discard code and data it decides are unused.
+  -->
+  <ItemDefinitionGroup Condition="$(Configuration.Contains('Release'))">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <!--
+      Support DLL CRT for projects which need or want it. Shipping code should use static CRT to
+      avoid system dependencies. We standardize the way to use the dll CRT to avoid integration
+      issues later.
+  -->
+  <ItemDefinitionGroup Condition="$(Configuration.Contains('Debug')) And $(Configuration.Contains('DllCrt'))">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="$(Configuration.Contains('Release')) And $(Configuration.Contains('DllCrt'))">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreadedDll</RuntimeLibrary>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <!--
+      To support our sometimes deeply nested projects, we have to do transforms on the paths we pass
+      to cl.exe and link.exe, because these tools are still today restricted by MAX_PATH for inputs.
+      PathHacks.targets inserts a pre-build MSBuild target which attempts to shorten paths to be
+      under the limit by resolving relative paths to absolute ones.
+  -->
+  <Import Project="$(MSBuildThisFileDirectory)/PathHacks.targets" Condition="Exists('$(MSBuildThisFileDirectory)/PathHacks.targets')" />
+  <!-- Guard variable to prevent including this property sheet twice. -->
+  <PropertyGroup>
+    <__ovrsource_common>true</__ovrsource_common>
+  </PropertyGroup>
+  <ImportGroup Label="PropertySheets">
+    <!-- Internal build settings -->
+    <Import Project="$(MSBuildThisFileDirectory)/common_internal.props" Condition="Exists('$(MSBuildThisFileDirectory)/common_internal.props')" />
+    <!-- Recursively crawl directories above the project to find directory-level common.props overrides. -->
+    <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildProjectDirectory), common.props))\common.props" Condition="Exists('$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildProjectDirectory), common.props))\common.props')" />
+  </ImportGroup>
+</Project>

@@ -1,0 +1,3 @@
+https://www.nuget.org/packages/Tobii.StreamEngine.Native/
+
+tobii.streamengine.native.2.2.2.363.nupkg

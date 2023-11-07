@@ -1,5 +1,4 @@
-/opencv/
-/RSSDK-R2/
-/eigen/
-/onnxruntime*/
-/libusb/
+/onnxruntime-?*/
+/*.7z
+/*.tar
+/opentrack.wiki
