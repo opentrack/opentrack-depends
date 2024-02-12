@@ -1,0 +1,162 @@
+diff --git cmake/CMakeLists.txt cmake/CMakeLists.txt
+index 94d650f685..451e41aa87 100644
+--- cmake/CMakeLists.txt
++++ cmake/CMakeLists.txt
+@@ -938,7 +938,7 @@ function(onnxruntime_set_compile_flags target_name)
+         target_compile_definitions(${target_name} PRIVATE -DONNXRUNTIME_ENABLE_MEMLEAK_CHECK)
+       endif()
+       target_compile_options(${target_name} PRIVATE "$<$<COMPILE_LANGUAGE:CUDA>:SHELL:--compiler-options /utf-8>" "$<$<COMPILE_LANGUAGE:CXX,C>:/utf-8>")
+-      target_compile_options(${target_name} PRIVATE "$<$<COMPILE_LANGUAGE:CUDA>:SHELL:--compiler-options /sdl>" "$<$<COMPILE_LANGUAGE:CXX,C>:/sdl>")
++      #target_compile_options(${target_name} PRIVATE "$<$<COMPILE_LANGUAGE:CUDA>:SHELL:--compiler-options /sdl>" "$<$<COMPILE_LANGUAGE:CXX,C>:/sdl>")
+       set_target_properties(${target_name}
+                       PROPERTIES VS_GLOBAL_CAExcludePath "${ORT_BINARY_DIR};${ORT_SOURCE_DIR}")
+       # We do not treat warnings from 3rd-party libraries as errors. In order to do that, we need to add their header files locations to /external:I.
+diff --git cmake/external/onnx cmake/external/onnx
+--- cmake/external/onnx
++++ cmake/external/onnx
+@@ -1 +1 @@
+-Subproject commit b86cc54efce19530fb953e4b21f57e6b3888534c
++Subproject commit b86cc54efce19530fb953e4b21f57e6b3888534c-dirty
+diff --git onnxruntime/core/platform/path_lib.cc onnxruntime/core/platform/path_lib.cc
+index 4f7cc52639..e780d3da9e 100644
+--- onnxruntime/core/platform/path_lib.cc
++++ onnxruntime/core/platform/path_lib.cc
+@@ -4,6 +4,7 @@
+ #include "core/platform/path_lib.h"
+ 
+ #include <cassert>
++#include <cstring>
+ #include <array>
+ #include <algorithm>
+ 
+@@ -36,23 +37,26 @@ namespace onnxruntime {
+ 
+ namespace {
+ 
+-Status RemoveFileSpec(PWSTR pszPath, size_t cchPath) {
+-  assert(pszPath != nullptr && pszPath[0] != L'\0');
+-  // Remove any trailing backslashes
+-  auto result = PathCchRemoveBackslash(pszPath, cchPath);
+-  if (result == S_OK || result == S_FALSE) {
+-    // Remove any trailing filename
+-    result = PathCchRemoveFileSpec(pszPath, cchPath);
+-    if (result == S_OK || result == S_FALSE) {
+-      // If we wind up with an empty string, turn it into '.'
+-      if (*pszPath == L'\0') {
+-        pszPath[0] = L'.';
+-        pszPath[1] = L'\0';
+-      }
+-      return Status::OK();
+-    }
++Status RemoveFileSpec(PWSTR path, size_t idx) {
++  assert(path != nullptr && path[0] != L'\0');
++  if (idx > 0)
++  {
++      idx--;
++      while (idx > 0 && (path[idx] == L'\\' || path[idx] == L'/'))
++          idx--;
++      while (idx > 0 && path[idx] != L'\\' && path[idx] != L'/')
++          idx--;
++      if (idx > 0 && (path[idx] == L'\\' || path[idx] == L'/'))
++          idx--;
+   }
+-  return Status(common::ONNXRUNTIME, common::FAIL, "unexpected failure");
++  path[idx+1] = L'\0';
++  if (idx == 0)
++  {
++      path[0] = L'.';
++      path[1] = '\0';
++  }
++
++  return Status::OK();
+ }
+ 
+ }  // namespace
+diff --git onnxruntime/core/platform/windows/env.cc onnxruntime/core/platform/windows/env.cc
+index 1a0713db43..e36d756bd6 100644
+--- onnxruntime/core/platform/windows/env.cc
++++ onnxruntime/core/platform/windows/env.cc
+@@ -271,7 +271,7 @@ PIDType WindowsEnv::GetSelfPid() const {
+ 
+ Status WindowsEnv::GetFileLength(_In_z_ const ORTCHAR_T* file_path, size_t& length) const {
+   wil::unique_hfile file_handle{
+-      CreateFile2(file_path, FILE_READ_ATTRIBUTES, FILE_SHARE_READ, OPEN_EXISTING, NULL)};
++      CreateFileW(file_path, FILE_READ_ATTRIBUTES, FILE_SHARE_READ, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL)};
+   if (file_handle.get() == INVALID_HANDLE_VALUE) {
+     const auto error_code = GetLastError();
+     return ORT_MAKE_STATUS(ONNXRUNTIME, FAIL, "open file ", ToUTF8String(Basename(file_path)), " fail, errcode = ", error_code, " - ", std::system_category().message(error_code));
+@@ -318,7 +318,7 @@ Status WindowsEnv::ReadFileIntoBuffer(_In_z_ const ORTCHAR_T* const file_path, c
+   ORT_RETURN_IF_NOT(offset >= 0, "offset < 0");
+   ORT_RETURN_IF_NOT(length <= buffer.size(), "length > buffer.size()");
+   wil::unique_hfile file_handle{
+-      CreateFile2(file_path, GENERIC_READ, FILE_SHARE_READ, OPEN_EXISTING, NULL)};
++      CreateFileW(file_path, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL)};
+   if (file_handle.get() == INVALID_HANDLE_VALUE) {
+     const auto error_code = GetLastError();
+     return ORT_MAKE_STATUS(ONNXRUNTIME, FAIL, "open file ", ToUTF8String(Basename(file_path)), " fail, errcode = ", error_code, " - ", std::system_category().message(error_code));
+@@ -371,7 +371,7 @@ Status WindowsEnv::MapFileIntoMemory(_In_z_ const ORTCHAR_T* file_path,
+   }
+ 
+   wil::unique_hfile file_handle{
+-      CreateFile2(file_path, GENERIC_READ, FILE_SHARE_READ, OPEN_EXISTING, NULL)};
++      CreateFileW(file_path, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL)};
+   if (file_handle.get() == INVALID_HANDLE_VALUE) {
+     const auto error_code = GetLastError();
+     return ORT_MAKE_STATUS(ONNXRUNTIME, FAIL,
+@@ -557,16 +557,8 @@ common::Status WindowsEnv::GetCanonicalPath(
+     PathString& canonical_path) const {
+   // adapted from MSVC STL std::filesystem::canonical() implementation
+   // https://github.com/microsoft/STL/blob/ed3cbf36416a385828e7a5987ca52cb42882d84b/stl/inc/filesystem#L2986
+-  CREATEFILE2_EXTENDED_PARAMETERS param;
+-  memset(&param, 0, sizeof(param));
+-  param.dwSize = sizeof(CREATEFILE2_EXTENDED_PARAMETERS);
+-  param.dwFileFlags = FILE_FLAG_BACKUP_SEMANTICS;
+-  wil::unique_hfile file_handle{CreateFile2(
+-      path.c_str(),
+-      FILE_READ_ATTRIBUTES,
+-      FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,
+-      OPEN_EXISTING,
+-      &param)};
++  wil::unique_hfile file_handle{
++      CreateFileW(path.c_str(), GENERIC_READ, FILE_SHARE_READ|FILE_SHARE_WRITE|FILE_SHARE_DELETE, NULL, OPEN_EXISTING, FILE_FLAG_BACKUP_SEMANTICS, NULL)};
+ 
+   if (file_handle.get() == INVALID_HANDLE_VALUE) {
+     const auto error_code = GetLastError();
+diff --git onnxruntime/core/platform/windows/env_time.cc onnxruntime/core/platform/windows/env_time.cc
+index 3644f91b0f..169ff395a6 100644
+--- onnxruntime/core/platform/windows/env_time.cc
++++ onnxruntime/core/platform/windows/env_time.cc
+@@ -28,7 +28,7 @@ namespace {
+ 
+ class WindowsEnvTime : public EnvTime {
+  public:
+-  WindowsEnvTime() : GetSystemTimePreciseAsFileTime_(GetSystemTimePreciseAsFileTime) {}
++  WindowsEnvTime() : GetSystemTimePreciseAsFileTime_(GetSystemTimeAsFileTime) {}
+ 
+   uint64_t NowMicros() override {
+     if (GetSystemTimePreciseAsFileTime_ != NULL) {
+diff --git onnxruntime/core/platform/windows/telemetry.cc onnxruntime/core/platform/windows/telemetry.cc
+index a9849873fd..a5954b7980 100644
+--- onnxruntime/core/platform/windows/telemetry.cc
++++ onnxruntime/core/platform/windows/telemetry.cc
+@@ -124,7 +124,7 @@ void NTAPI WindowsTelemetry::ORT_TL_EtwEnableCallback(
+ }
+ 
+ void WindowsTelemetry::EnableTelemetryEvents() const {
+-  enabled_ = true;
++  enabled_ = false;
+ }
+ 
+ void WindowsTelemetry::DisableTelemetryEvents() const {
+diff --git onnxruntime/core/providers/cpu/tensor/upsample_antialias.h onnxruntime/core/providers/cpu/tensor/upsample_antialias.h
+index 59b512def6..af9a280d30 100644
+--- onnxruntime/core/providers/cpu/tensor/upsample_antialias.h
++++ onnxruntime/core/providers/cpu/tensor/upsample_antialias.h
+@@ -240,6 +240,7 @@ void SetupUpsampleFilterAntiAlias(FilterParamsAntiAlias<T>& p,
+ 
+       float total_weight_inv = total_weight == 0.0f ? 1.f : 1.0f / total_weight;
+       auto* scale_buffer_int = reinterpret_cast<int32_t*>(scale_buffer);
++      (void)scale_buffer_int;
+       for (x = 0; x < xmax_cut - xmin_cut; x++) {
+         scale_buffer[x] *= total_weight_inv;
+ 
