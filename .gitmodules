@@ -8,9 +8,6 @@
 	path = steamvr
 	url = https://github.com/opentrack/openvr.git
 	branch = master
-[submodule "eigen"]
-	path = eigen
-	url = https://gitlab.com/libeigen/eigen.git
 [submodule "libusb"]
 	path = libusb
 	url = https://github.com/libusb/libusb.git
