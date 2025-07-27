@@ -11,12 +11,6 @@ index 94d650f685..451e41aa87 100644
        set_target_properties(${target_name}
                        PROPERTIES VS_GLOBAL_CAExcludePath "${ORT_BINARY_DIR};${ORT_SOURCE_DIR}")
        # We do not treat warnings from 3rd-party libraries as errors. In order to do that, we need to add their header files locations to /external:I.
-diff --git cmake/external/onnx cmake/external/onnx
---- cmake/external/onnx
-+++ cmake/external/onnx
-@@ -1 +1 @@
--Subproject commit b86cc54efce19530fb953e4b21f57e6b3888534c
-+Subproject commit b86cc54efce19530fb953e4b21f57e6b3888534c-dirty
 diff --git onnxruntime/core/platform/path_lib.cc onnxruntime/core/platform/path_lib.cc
 index 4f7cc52639..e780d3da9e 100644
 --- onnxruntime/core/platform/path_lib.cc
